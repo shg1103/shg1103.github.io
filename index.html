@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容矩阵 - 专业内容分享平台</title>
+    <meta name="description" content="覆盖数码、装修、健康、职场、理财、旅游、宠物等领域的专业内容平台">
+    <style>
+        :root{--bg:#0f172a;--card:#1e293b;--border:#334155;--text:#e2e8f0;--text2:#94a3b8;--accent:#3b82f6;--g:#22c55e}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:24px}
+        .container{max-width:900px;margin:0 auto}
+        h1{font-size:36px;text-align:center;margin:48px 0 8px}
+        .sub{text-align:center;color:var(--text2);font-size:16px;margin-bottom:48px}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+        .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;text-decoration:none;color:var(--text);transition:all .2s}
+        .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+        .card .icon{font-size:32px;margin-bottom:12px}
+        .card h3{font-size:18px;color:var(--accent);margin-bottom:8px}
+        .card p{font-size:14px;color:var(--text2);line-height:1.6}
+        .card .tag-row{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+        .tag{font-size:11px;padding:2px 8px;border-radius:10px;background:rgba(59,130,246,.15);color:var(--accent)}
+        footer{text-align:center;color:var(--text2);font-size:13px;margin-top:64px;padding:24px 0;border-top:1px solid var(--border)}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 内容矩阵</h1>
+        <p class="sub">7个垂直领域 · 每日自动更新 · 专业内容分享</p>
+        
+        <div class="grid">
+            <a href="/digital-review/" class="card">
+                <div class="icon">📱</div>
+                <h3>数码评测</h3>
+                <p>手机推荐、笔记本选购、耳机测评、平板对比，专业数码内容</p>
+                <div class="tag-row">
+                    <span class="tag">手机推荐</span><span class="tag">笔记本</span><span class="tag">耳机</span>
+                </div>
+            </a>
+            <a href="/home-design/" class="card">
+                <div class="icon">🏠</div>
+                <h3>家居装修</h3>
+                <p>装修攻略、家装设计、软装搭配、收纳技巧，打造理想家居</p>
+                <div class="tag-row">
+                    <span class="tag">装修攻略</span><span class="tag">设计</span><span class="tag">收纳</span>
+                </div>
+            </a>
+            <a href="/health-wellness/" class="card">
+                <div class="icon">💊</div>
+                <h3>健康养生</h3>
+                <p>养生食谱、中医调理、运动健身、睡眠改善，科学养生指南</p>
+                <div class="tag-row">
+                    <span class="tag">养生食谱</span><span class="tag">健身</span><span class="tag">睡眠</span>
+                </div>
+            </a>
+            <a href="/career-skills/" class="card">
+                <div class="icon">💼</div>
+                <h3>职场技能</h3>
+                <p>简历模板、面试技巧、副业赚钱、办公效率，职场进阶必备</p>
+                <div class="tag-row">
+                    <span class="tag">简历</span><span class="tag">面试</span><span class="tag">副业</span>
+                </div>
+            </a>
+            <a href="/finance-tips/" class="card">
+                <div class="icon">💰</div>
+                <h3>理财指南</h3>
+                <p>基金定投、保险选购、省钱技巧、投资避坑，从入门到精通</p>
+                <div class="tag-row">
+                    <span class="tag">理财</span><span class="tag">基金</span><span class="tag">省钱</span>
+                </div>
+            </a>
+            <a href="/travel-guide/" class="card">
+                <div class="icon">✈️</div>
+                <h3>旅游攻略</h3>
+                <p>国内旅游、自驾路线、景点攻略、民宿推荐，说走就走的旅行</p>
+                <div class="tag-row">
+                    <span class="tag">旅游</span><span class="tag">自驾</span><span class="tag">民宿</span>
+                </div>
+            </a>
+            <a href="/pet-care/" class="card">
+                <div class="icon">🐱</div>
+                <h3>宠物养护</h3>
+                <p>猫咪喂养、狗狗训练、宠物医疗、用品推荐，科学养宠全指南</p>
+                <div class="tag-row">
+                    <span class="tag">猫咪</span><span class="tag">狗狗</span><span class="tag">医疗</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <footer>
+        <p>内容矩阵 · 每日自动更新 · 2025</p>
+    </footer>
+</body>
+</html>
