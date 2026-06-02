@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown转HTML - DevTools</title>
+    <meta name="description" content="实时预览Markdown渲染效果">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#128221; Markdown转HTML</h1>
+            
+        <textarea id="mdInput" placeholder="输入Markdown..."></textarea>
+        <button onclick="convertMd()">转换为HTML</button>
+        <pre id="mdOutput"></pre>
+        <script>
+        function convertMd() {
+          let md = document.getElementById('mdInput').value;
+          let html = md
+            .replace(/^### (.+)$/gm,'<h3>$1</h3>')
+            .replace(/^## (.+)$/gm,'<h2>$1</h2>')
+            .replace(/^# (.+)$/gm,'<h1>$1</h1>')
+            .replace(/^\d+\. (.+)$/gm,'<li>$1</li>')
+            .replace(/^- (.+)$/gm,'<li>$1</li>')
+            .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+            .replace(/\*(.+?)\*/g,'<i>$1</i>')
+            .replace(/`(.+?)`/g,'<code>$1</code>')
+            .replace(/\n\n/g,'<br><br>');
+          document.getElementById('mdOutput').textContent = html;
+        }
+        </script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:20px;color:#999;font-size:13px;">
+        <a href="../sitemap.xml" style="color:#6366f1;">站点地图</a> |
+        <a href="../index.html" style="color:#6366f1;">返回首页</a>
+    </footer>
+</body>
+</html>
