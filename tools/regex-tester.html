@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式测试器 - DevTools</title>
+    <meta name="description" content="实时测试正则匹配，支持高亮">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#128269; 正则表达式测试器</h1>
+            
+        <input type="text" id="regexInput" placeholder="输入正则表达式，如：\d+" style="font-family:monospace;">
+        <textarea id="regexText" placeholder="输入测试文本..."></textarea>
+        <button onclick="testRegex()">测试匹配</button>
+        <pre id="regexOutput">匹配结果将显示在这里</pre>
+        <script>
+        function testRegex() {
+          try {
+            const re = new RegExp(document.getElementById('regexInput').value, 'g');
+            const text = document.getElementById('regexText').value;
+            const matches = [...text.matchAll(re)];
+            let r = '匹配到 ' + matches.length + ' 处：\n';
+            matches.forEach((m,i) => r += (i+1) + '. 「' + m[0] + '」 位置：' + m.index + '\n');
+            if (matches.length===0) r = '没有匹配结果';
+            document.getElementById('regexOutput').textContent = r;
+          } catch(e) { document.getElementById('regexOutput').textContent = '正则错误：' + e.message; }
+        }
+        </script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:20px;color:#999;font-size:13px;">
+        <a href="../sitemap.xml" style="color:#6366f1;">站点地图</a> |
+        <a href="../index.html" style="color:#6366f1;">返回首页</a>
+    </footer>
+</body>
+</html>
