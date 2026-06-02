@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cron表达式解析器 - DevTools</title>
+    <meta name="description" content="解析Linux Cron表达式，查看下次执行时间">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#9200; Cron表达式解析器</h1>
+            
+        <textarea id="cronInput" placeholder="输入Cron表达式，如：*/5 * * * *"></textarea>
+        <button onclick="parseCron()">解析</button>
+        <pre id="cronOutput">结果将显示在这里</pre>
+        <script>
+        function parseCron() {
+          const v = document.getElementById('cronInput').value.trim();
+          if (!v) return;
+          const parts = v.split(/\s+/);
+          if (parts.length < 5) { document.getElementById('cronOutput').textContent = '格式错误：需要至少5个字段'; return; }
+          let r = 'Cron表达式：' + v + '\n\n解析结果：\n';
+          r += '分钟：' + parts[0] + '\n';
+          r += '小时：' + parts[1] + '\n';
+          r += '日：' + parts[2] + '\n';
+          r += '月：' + parts[3] + '\n';
+          r += '星期：' + parts[4] + '\n';
+          document.getElementById('cronOutput').textContent = r;
+        }
+        </script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:20px;color:#999;font-size:13px;">
+        <a href="../sitemap.xml" style="color:#6366f1;">站点地图</a> |
+        <a href="../index.html" style="color:#6366f1;">返回首页</a>
+    </footer>
+</body>
+</html>
