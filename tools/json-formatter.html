@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON格式化/校验 - DevTools</title>
+    <meta name="description" content="格式化、压缩、校验JSON数据">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#128196; JSON格式化/校验</h1>
+            
+        <textarea id="jsonInput" placeholder="粘贴JSON..."></textarea>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button onclick="formatJson()">格式化</button>
+          <button onclick="minifyJson()" style="background:#888;">压缩</button>
+          <button onclick="validateJson()" style="background:#e11d48;">校验</button>
+        </div>
+        <pre id="jsonOutput">结果将显示在这里</pre>
+        <script>
+        function formatJson() {
+          try { document.getElementById('jsonOutput').textContent = JSON.stringify(JSON.parse(document.getElementById('jsonInput').value), null, 2); }
+          catch(e) { document.getElementById('jsonOutput').textContent = 'JSON解析错误：' + e.message; }
+        }
+        function minifyJson() {
+          try { document.getElementById('jsonOutput').textContent = JSON.stringify(JSON.parse(document.getElementById('jsonInput').value)); }
+          catch(e) { document.getElementById('jsonOutput').textContent = 'JSON解析错误：' + e.message; }
+        }
+        function validateJson() {
+          try { JSON.parse(document.getElementById('jsonInput').value); document.getElementById('jsonOutput').textContent = '✅ JSON 格式正确！'; }
+          catch(e) { document.getElementById('jsonOutput').textContent = '❌ JSON 格式错误：\n' + e.message; }
+        }
+        </script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:20px;color:#999;font-size:13px;">
+        <a href="../sitemap.xml" style="color:#6366f1;">站点地图</a> |
+        <a href="../index.html" style="color:#6366f1;">返回首页</a>
+    </footer>
+</body>
+</html>
