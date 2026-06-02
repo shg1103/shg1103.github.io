@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间戳转换 - DevTools</title>
+    <meta name="description" content="时间戳与日期互转，支持批量">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#128336; 时间戳转换</h1>
+            
+        <input type="text" id="tsInput" placeholder="输入时间戳（秒或毫秒）">
+        <button onclick="tsToDate()">时间戳 → 日期</button>
+        <input type="datetime-local" id="dateInput" style="margin-top:12px;padding:8px;">
+        <button onclick="dateToTs()" style="margin-top:12px;">日期 → 时间戳</button>
+        <pre id="tsOutput">结果将显示在这里</pre>
+        <script>
+        function tsToDate() {
+          let v = document.getElementById('tsInput').value.trim();
+          if (!v) return;
+          let ts = parseInt(v);
+          if (v.length > 10) ts = ts / 1000;
+          let d = new Date(ts * 1000);
+          document.getElementById('tsOutput').textContent = '日期时间：' + d.toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'}) + '\nUnix时间戳（秒）：' + Math.floor(ts) + '\nUnix时间戳（毫秒）：' + Math.floor(ts*1000);
+        }
+        function dateToTs() {
+          let v = document.getElementById('dateInput').value;
+          if (!v) return;
+          let d = new Date(v);
+          document.getElementById('tsOutput').textContent = 'Unix时间戳（秒）：' + Math.floor(d.getTime()/1000) + '\nUnix时间戳（毫秒）：' + d.getTime();
+        }
+        </script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:20px;color:#999;font-size:13px;">
+        <a href="../sitemap.xml" style="color:#6366f1;">站点地图</a> |
+        <a href="../index.html" style="color:#6366f1;">返回首页</a>
+    </footer>
+</body>
+</html>
