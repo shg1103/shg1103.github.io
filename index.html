@@ -3,92 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>内容矩阵 - 专业内容分享平台</title>
-    <meta name="description" content="覆盖数码、装修、健康、职场、理财、旅游、宠物等领域的专业内容平台">
-    <style>
-        :root{--bg:#0f172a;--card:#1e293b;--border:#334155;--text:#e2e8f0;--text2:#94a3b8;--accent:#3b82f6;--g:#22c55e}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:24px}
-        .container{max-width:900px;margin:0 auto}
-        h1{font-size:36px;text-align:center;margin:48px 0 8px}
-        .sub{text-align:center;color:var(--text2);font-size:16px;margin-bottom:48px}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-        .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;text-decoration:none;color:var(--text);transition:all .2s}
-        .card:hover{border-color:var(--accent);transform:translateY(-2px)}
-        .card .icon{font-size:32px;margin-bottom:12px}
-        .card h3{font-size:18px;color:var(--accent);margin-bottom:8px}
-        .card p{font-size:14px;color:var(--text2);line-height:1.6}
-        .card .tag-row{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
-        .tag{font-size:11px;padding:2px 8px;border-radius:10px;background:rgba(59,130,246,.15);color:var(--accent)}
-        footer{text-align:center;color:var(--text2);font-size:13px;margin-top:64px;padding:24px 0;border-top:1px solid var(--border)}
-    </style>
+    <title>DevTools - 程序员在线工具矩阵</title>
+    <meta name="description" content="10个免费程序员工具：Cron解析、SQL格式化、正则测试、JSON格式化、Base64编解码、Markdown转HTML、时间戳转换、JWT解码、JSON/CSV互转、API测试。">
+    <link rel="stylesheet" href="css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>📚 内容矩阵</h1>
-        <p class="sub">7个垂直领域 · 每日自动更新 · 专业内容分享</p>
-        
-        <div class="grid">
-            <a href="/digital-review/" class="card">
-                <div class="icon">📱</div>
-                <h3>数码评测</h3>
-                <p>手机推荐、笔记本选购、耳机测评、平板对比，专业数码内容</p>
-                <div class="tag-row">
-                    <span class="tag">手机推荐</span><span class="tag">笔记本</span><span class="tag">耳机</span>
-                </div>
+    <header><div class="container"><a href="index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <h2 style="margin-bottom:16px;font-size:20px;">&#128736; 全部工具</h2>
+        <div class="tool-grid">
+            <a href="tools/cron-parser.html" class="tool-card">
+                <div class="icon">&#9200;</div>
+                <div class="name">Cron表达式解析器</div>
+                <div class="desc">解析Linux Cron表达式，查看下次执行时间</div>
             </a>
-            <a href="/home-design/" class="card">
-                <div class="icon">🏠</div>
-                <h3>家居装修</h3>
-                <p>装修攻略、家装设计、软装搭配、收纳技巧，打造理想家居</p>
-                <div class="tag-row">
-                    <span class="tag">装修攻略</span><span class="tag">设计</span><span class="tag">收纳</span>
-                </div>
+            <a href="tools/sql-formatter.html" class="tool-card">
+                <div class="icon">&#128449;</div>
+                <div class="name">SQL格式化工具</div>
+                <div class="desc">一键美化/压缩SQL语句</div>
             </a>
-            <a href="/health-wellness/" class="card">
-                <div class="icon">💊</div>
-                <h3>健康养生</h3>
-                <p>养生食谱、中医调理、运动健身、睡眠改善，科学养生指南</p>
-                <div class="tag-row">
-                    <span class="tag">养生食谱</span><span class="tag">健身</span><span class="tag">睡眠</span>
-                </div>
+            <a href="tools/regex-tester.html" class="tool-card">
+                <div class="icon">&#128269;</div>
+                <div class="name">正则表达式测试器</div>
+                <div class="desc">实时测试正则匹配，支持高亮</div>
             </a>
-            <a href="/career-skills/" class="card">
-                <div class="icon">💼</div>
-                <h3>职场技能</h3>
-                <p>简历模板、面试技巧、副业赚钱、办公效率，职场进阶必备</p>
-                <div class="tag-row">
-                    <span class="tag">简历</span><span class="tag">面试</span><span class="tag">副业</span>
-                </div>
+            <a href="tools/json-formatter.html" class="tool-card">
+                <div class="icon">&#128196;</div>
+                <div class="name">JSON格式化/校验</div>
+                <div class="desc">格式化、压缩、校验JSON数据</div>
             </a>
-            <a href="/finance-tips/" class="card">
-                <div class="icon">💰</div>
-                <h3>理财指南</h3>
-                <p>基金定投、保险选购、省钱技巧、投资避坑，从入门到精通</p>
-                <div class="tag-row">
-                    <span class="tag">理财</span><span class="tag">基金</span><span class="tag">省钱</span>
-                </div>
+            <a href="tools/base64-tool.html" class="tool-card">
+                <div class="icon">&#128272;</div>
+                <div class="name">Base64编解码</div>
+                <div class="desc">文本/文件Base64编码解码</div>
             </a>
-            <a href="/travel-guide/" class="card">
-                <div class="icon">✈️</div>
-                <h3>旅游攻略</h3>
-                <p>国内旅游、自驾路线、景点攻略、民宿推荐，说走就走的旅行</p>
-                <div class="tag-row">
-                    <span class="tag">旅游</span><span class="tag">自驾</span><span class="tag">民宿</span>
-                </div>
+            <a href="tools/markdown-to-html.html" class="tool-card">
+                <div class="icon">&#128221;</div>
+                <div class="name">Markdown转HTML</div>
+                <div class="desc">实时预览Markdown渲染效果</div>
             </a>
-            <a href="/pet-care/" class="card">
-                <div class="icon">🐱</div>
-                <h3>宠物养护</h3>
-                <p>猫咪喂养、狗狗训练、宠物医疗、用品推荐，科学养宠全指南</p>
-                <div class="tag-row">
-                    <span class="tag">猫咪</span><span class="tag">狗狗</span><span class="tag">医疗</span>
-                </div>
+            <a href="tools/timestamp-converter.html" class="tool-card">
+                <div class="icon">&#128336;</div>
+                <div class="name">时间戳转换</div>
+                <div class="desc">时间戳与日期互转，支持批量</div>
+            </a>
+            <a href="tools/jwt-decoder.html" class="tool-card">
+                <div class="icon">&#128273;</div>
+                <div class="name">JWT解码器</div>
+                <div class="desc">解析JWT Token的Header/Payload</div>
+            </a>
+            <a href="tools/json-csv-converter.html" class="tool-card">
+                <div class="icon">&#128202;</div>
+                <div class="name">JSON/CSV互转</div>
+                <div class="desc">JSON与CSV格式互相转换</div>
+            </a>
+            <a href="tools/api-tester.html" class="tool-card">
+                <div class="icon">&#127760;</div>
+                <div class="name">API接口测试工具</div>
+                <div class="desc">在线发送HTTP请求，测试API接口</div>
             </a>
         </div>
-    </div>
-    <footer>
-        <p>内容矩阵 · 每日自动更新 · 2025</p>
-    </footer>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:20px;margin-top:24px;text-align:center;color:#666;font-size:14px;">
+            <a href="sitemap.xml" style="color:#6366f1;">查看站点地图</a>
+        </div>
+    </main>
 </body>
 </html>
