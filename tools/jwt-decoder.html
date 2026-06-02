@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT解码器 - DevTools</title>
+    <meta name="description" content="解析JWT Token的Header/Payload">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#128273; JWT解码器</h1>
+            
+        <textarea id="jwtInput" placeholder="粘贴JWT Token..."></textarea>
+        <button onclick="decodeJwt()">解码</button>
+        <pre id="jwtOutput">解码结果将显示在这里</pre>
+        <script>
+        function decodeJwt() {
+          try {
+            const t = document.getElementById('jwtInput').value.trim();
+            const parts = t.split('.');
+            if (parts.length < 2) { document.getElementById('jwtOutput').textContent = '无效的JWT格式'; return; }
+            const h = JSON.parse(atob(parts[0].replace(/-/g,'+').replace(/_/g,'/')));
+            const p = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+            let r = '=== Header ===\n' + JSON.stringify(h,null,2) + '\n\n=== Payload ===\n' + JSON.stringify(p,null,2);
+            if (p.exp) r += '\n\n过期时间：' + new Date(p.exp*1000).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'});
+            if (p.iat) r += '\n签发时间：' + new Date(p.iat*1000).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'});
+            document.getElementById('jwtOutput').textContent = r;
+          } catch(e) { document.getElementById('jwtOutput').textContent = '解码错误：' + e.message; }
+        }
+        </script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:20px;color:#999;font-size:13px;">
+        <a href="../sitemap.xml" style="color:#6366f1;">站点地图</a> |
+        <a href="../index.html" style="color:#6366f1;">返回首页</a>
+    </footer>
+</body>
+</html>
