@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API接口测试工具 - DevTools</title>
+    <meta name="description" content="在线发送HTTP请求，测试API接口">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#127760; API接口测试工具</h1>
+            
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;">
+          <select id="method" style="padding:8px;border:1px solid #ddd;border-radius:8px;">
+            <option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option>
+          </select>
+          <input type="text" id="apiUrl" placeholder="输入API地址" style="flex:1;padding:8px;border:1px solid #ddd;border-radius:8px;">
+        </div>
+        <textarea id="apiBody" placeholder="请求体（JSON，POST/PUT时填写）"></textarea>
+        <button onclick="sendRequest()">发送请求</button>
+        <pre id="apiOutput">响应将显示在这里</pre>
+        <script>
+        async function sendRequest() {
+          const method = document.getElementById('method').value;
+          const url = document.getElementById('apiUrl').value.trim();
+          if (!url) return;
+          document.getElementById('apiOutput').textContent = '请求中...';
+          try {
+            const opts = { method, headers:{'Content-Type':'application/json'} };
+            if (method!=='GET') opts.body = document.getElementById('apiBody').value;
+            const res = await fetch(url, opts);
+            const text = await res.text();
+            let pretty = 'HTTP ' + res.status + ' ' + res.statusText + '\n';
+            try { pretty += JSON.stringify(JSON.parse(text), null, 2); } catch(e) { pretty += text; }
+            document.getElementById('apiOutput').textContent = pretty;
+          } catch(e) { document.getElementById('apiOutput').textContent = '请求失败：' + e.message; }
+        }
+        </script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:20px;color:#999;font-size:13px;">
+        <a href="../sitemap.xml" style="color:#6366f1;">站点地图</a> |
+        <a href="../index.html" style="color:#6366f1;">返回首页</a>
+    </footer>
+</body>
+</html>
