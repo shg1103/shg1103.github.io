@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL格式化工具 - DevTools</title>
+    <meta name="description" content="一键美化/压缩SQL语句">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#128449; SQL格式化工具</h1>
+            
+        <textarea id="sqlInput" placeholder="粘贴SQL语句..."></textarea>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button onclick="formatSql()">格式化</button>
+          <button onclick="minifySql()" style="background:#888;">压缩</button>
+        </div>
+        <pre id="sqlOutput">结果将显示在这里</pre>
+        <script>
+        function formatSql() {
+          let sql = document.getElementById('sqlInput').value.trim();
+          sql = sql.replace(/\b(SELECT|FROM|WHERE|AND|OR|INSERT|INTO|VALUES|UPDATE|SET|DELETE|CREATE|TABLE|ALTER|DROP|JOIN|INNER|LEFT|RIGHT|ON|GROUP|BY|ORDER|HAVING|LIMIT)\b/gi, '\n$1').replace(/\s*\n\s*/g,'\n').trim();
+          document.getElementById('sqlOutput').textContent = sql;
+        }
+        function minifySql() {
+          const sql = document.getElementById('sqlInput').value.trim().replace(/\s+/g,' ');
+          document.getElementById('sqlOutput').textContent = sql;
+        }
+        </script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:20px;color:#999;font-size:13px;">
+        <a href="../sitemap.xml" style="color:#6366f1;">站点地图</a> |
+        <a href="../index.html" style="color:#6366f1;">返回首页</a>
+    </footer>
+</body>
+</html>
