@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64编解码 - DevTools</title>
+    <meta name="description" content="文本/文件Base64编码解码">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#128272; Base64编解码</h1>
+            
+        <textarea id="b64Input" placeholder="输入文本或Base64字符串..."></textarea>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button onclick="toBase64()">编码 → Base64</button>
+          <button onclick="fromBase64()">解码 Base64 →</button>
+        </div>
+        <pre id="b64Output">结果将显示在这里</pre>
+        <script>
+        function toBase64() {
+          try { document.getElementById('b64Output').textContent = btoa(unescape(encodeURIComponent(document.getElementById('b64Input').value))); }
+          catch(e) { document.getElementById('b64Output').textContent = '编码错误：' + e.message; }
+        }
+        function fromBase64() {
+          try { document.getElementById('b64Output').textContent = decodeURIComponent(escape(atob(document.getElementById('b64Input').value.trim()))); }
+          catch(e) { document.getElementById('b64Output').textContent = '解码错误：输入不是有效的Base64字符串'; }
+        }
+        </script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:20px;color:#999;font-size:13px;">
+        <a href="../sitemap.xml" style="color:#6366f1;">站点地图</a> |
+        <a href="../index.html" style="color:#6366f1;">返回首页</a>
+    </footer>
+</body>
+</html>
