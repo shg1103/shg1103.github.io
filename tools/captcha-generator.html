@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机验证码生成器 - 在线验证码图片文本生成 | DevTools</title>
+    <meta name="description" content="免费在线随机验证码生成器，支持自定义位数(4-8位)、大小写字母/数字/符号开关、批量生成5个验证码，纯前端随机生成不下传服务器。">
+    <meta name="keywords" content="验证码生成,随机验证码,验证码,验证码工具,随机字符串,captcha generator,验证码位数,批量验证码,随机密码">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/captcha-generator.html">
+    <meta property="og:title" content="随机验证码生成器 - 在线验证码图片文本生成 | DevTools">
+    <meta property="og:description" content="免费在线随机验证码生成器，支持自定义位数(4-8位)、大小写字母/数字/符号开关、批量生成5个验证码，纯前端随机生成不下传服务器。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/captcha-generator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="随机验证码生成器 - 在线验证码图片文本生成 | DevTools">
+    <meta name="twitter:description" content="免费在线随机验证码生成器，支持自定义位数(4-8位)、大小写字母/数字/符号开关、批量生成5个验证码，纯前端随机生成不下传服务器。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>随机验证码生成器</h1>
+        <p style="color:#666;margin-bottom:20px;">自定义位数和字符集的随机验证码生成</p>
+        <div class="tool-body">
+            <div class="tool-ui">
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+        <label>位数: <input type="number" id="capLen" value="4" min="4" max="8" style="width:60px;padding:4px 8px;border:1px solid #ddd;border-radius:4px;"></label>
+        <label><input type="checkbox" id="capUpper" checked> 大写</label>
+        <label><input type="checkbox" id="capLower" checked> 小写</label>
+        <label><input type="checkbox" id="capDigit" checked> 数字</label>
+        <label><input type="checkbox" id="capSymbol"> 符号</label>
+        <button class="tool-btn" onclick="generate()">生成</button>
+    </div>
+    <div id="captchaDisplay" style="background:#f5f5f5;border:2px dashed #ddd;border-radius:8px;padding:20px;text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:32px;font-family:monospace;letter-spacing:6px;color:#999;">点击生成</span>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+        <button class="tool-btn" onclick="refresh()">刷新</button>
+        <button class="tool-btn" onclick="copyCaptcha()">复制文本</button>
+        <button class="tool-btn" onclick="batchGen()">批量生成 5 个</button>
+    </div>
+    <div id="batchResult" style="margin-top:12px;display:none;">
+        <div style="font-size:13px;font-weight:600;color:#333;margin-bottom:8px;">批量结果:</div>
+        <div id="batchList" style="font-family:monospace;background:#f9f9f9;border:1px solid #eee;border-radius:6px;padding:10px;"></div>
+    </div>
+</div>
+<script>
+function generateCode(){
+    const len=parseInt(document.getElementById('capLen').value)||4;
+    const upper=document.getElementById('capUpper').checked;
+    const lower=document.getElementById('capLower').checked;
+    const digit=document.getElementById('capDigit').checked;
+    const symbol=document.getElementById('capSymbol').checked;
+    let pool='';
+    if(upper) pool+='ABCDEFGHJKLMNPQRSTUVWXYZ';
+    if(lower) pool+='abcdefghjkmnpqrstuvwxyz';
+    if(digit) pool+='23456789';
+    if(symbol) pool+='!@#$%%^&*';
+    if(!pool) pool='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code='';
+    const arr=new Uint32Array(len);
+    crypto.getRandomValues(arr);
+    for(let i=0;i<len;i++) code+=pool[arr[i]%%pool.length];
+    return code;
+}
+function generate(){
+    const code=generateCode();
+    const html='<span style="font-size:40px;font-family:monospace;letter-spacing:8px;font-weight:bold;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">'+code+'</span>';
+    document.getElementById('captchaDisplay').innerHTML=html;
+}
+function refresh(){generate();}
+function copyCaptcha(){
+    const txt=document.getElementById('captchaDisplay').innerText;
+    if(!txt||txt==='点击生成')return;
+    navigator.clipboard.writeText(txt).then(()=>alert('已复制: '+txt));
+}
+function batchGen(){
+    const list=document.getElementById('batchList');
+    const arr=document.getElementById('batchResult');
+    arr.style.display='block';
+    let html='';
+    for(let i=0;i<5;i++) html+=i+1+'. '+generateCode()+'\n';
+    list.textContent=html;
+}
+</script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
