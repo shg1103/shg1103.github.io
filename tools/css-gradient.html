@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 渐变生成器 - DevTools程序员在线工具</title>
+    <meta name="description" content="在线 CSS 渐变生成工具，支持线性渐变和径向渐变，可视化调整颜色和角度，一键复制 CSS 代码，前端开发必备。">
+    <meta name="keywords" content="css渐变,css gradient,线性渐变,background gradient,css背景生成器">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#127752; CSS 渐变生成器</h1>
+            <div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex-wrap:wrap;">
+<div>
+  <div style="margin-bottom:16px;">
+    <label style="font-weight:600;font-size:13px;">渐变类型</label>
+    <div style="display:flex;gap:8px;margin-top:6px;">
+      <button id="btnLinear" onclick="setType('linear')" style="padding:6px 16px;font-size:12px;">线性渐变</button>
+      <button id="btnRadial" onclick="setType('radial')" style="background:#6b7280;padding:6px 16px;font-size:12px;">径向渐变</button>
+    </div>
+  </div>
+  <div id="angleCtrl" style="margin-bottom:16px;">
+    <label style="font-weight:600;font-size:13px;">角度: <span id="angleVal">135</span>deg</label>
+    <input type="range" id="angle" min="0" max="360" value="135" style="width:100%;margin-top:6px;" oninput="document.getElementById('angleVal').textContent=this.value;updateGrad()">
+  </div>
+  <div style="margin-bottom:16px;">
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:8px;">颜色列表</label>
+    <div id="colorStops"></div>
+    <button onclick="addStop()" style="background:#10b981;margin-top:8px;padding:8px 16px;font-size:12px;">+ 添加颜色</button>
+  </div>
+  <div>
+    <label style="font-weight:600;font-size:13px;">快速预设</label>
+    <div id="presets" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;"></div>
+  </div>
+</div>
+<div>
+  <div id="preview" style="width:100%;height:200px;border-radius:12px;margin-bottom:16px;transition:background .3s;"></div>
+  <div style="margin-bottom:12px;">
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:6px;">CSS 代码</label>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="cssOutput" readonly style="flex:1;font-family:monospace;font-size:12px;background:#f8f8f8;">
+      <button onclick="navigator.clipboard.writeText(document.getElementById('cssOutput').value).then(()=>{const b=event.target;b.textContent='已复制!';setTimeout(()=>b.textContent='复制',1500);})" style="padding:8px 14px;font-size:12px;">复制</button>
+    </div>
+  </div>
+  <div>
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:6px;">background 属性</label>
+    <textarea id="bgOutput" readonly style="min-height:60px;font-family:monospace;font-size:12px;background:#f8f8f8;"></textarea>
+  </div>
+</div>
+</div>
+</div>
+<script>
+let stops=[{color:'#6366f1',pos:0},{color:'#8b5cf6',pos:50},{color:'#ec4899',pos:100}];
+let gradType='linear';
+const presetData=[['#FF512F','#DD2476'],['#4776E6','#8E54E9'],['#11998e','#38ef7d'],['#f7971e','#ffd200'],['#cc2b5e','#753a88'],['#00b09b','#96c93d'],['#2196F3','#f44336'],['#1FA2FF','#12D8FA']];
+const presDiv=document.getElementById('presets');
+presetData.forEach(([c1,c2])=>{const d=document.createElement('div');d.style.cssText='width:32px;height:32px;border-radius:6px;background:linear-gradient(135deg,'+c1+','+c2+');cursor:pointer;';d.onclick=()=>{stops=[{color:c1,pos:0},{color:c2,pos:100}];renderStops();updateGrad();};presDiv.appendChild(d);});
+function renderStops(){
+  const div=document.getElementById('colorStops');
+  div.innerHTML=stops.map((s,i)=>'<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">'
+    +'<input type="color" value="'+s.color+'" onchange="stops['+i+'].color=this.value;updateGrad()" style="width:36px;height:36px;border:none;border-radius:6px;cursor:pointer;padding:2px;">'
+    +'<input type="number" value="'+s.pos+'" min="0" max="100" onchange="stops['+i+'].pos=parseInt(this.value);updateGrad()" style="width:70px;font-size:13px;text-align:center;">%'
+    +(stops.length>2?'<button onclick="stops.splice('+i+',1);renderStops();updateGrad()" style="background:#ef4444;padding:4px 8px;font-size:12px;">X</button>':'')
+    +'</div>').join('');
+}
+function addStop(){stops.push({color:'#'+Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0'),pos:50});renderStops();updateGrad();}
+function setType(t){gradType=t;document.getElementById('angleCtrl').style.display=t==='linear'?'block':'none';document.getElementById('btnLinear').style.background=t==='linear'?'#6366f1':'#6b7280';document.getElementById('btnRadial').style.background=t==='radial'?'#6366f1':'#6b7280';updateGrad();}
+function updateGrad(){
+  const sorted=[...stops].sort((a,b)=>a.pos-b.pos);
+  const stopStr=sorted.map(s=>s.color+' '+s.pos+'%').join(', ');
+  const angle=document.getElementById('angle').value;
+  let grad=gradType==='linear'?'linear-gradient('+angle+'deg, '+stopStr+')':'radial-gradient(circle, '+stopStr+')';
+  document.getElementById('preview').style.background=grad;
+  document.getElementById('cssOutput').value='background: '+grad+';';
+  document.getElementById('bgOutput').value='background-image: '+grad+';
+/* 带前缀兼容 */
+background-image: -webkit-'+grad+';
+background: '+grad+';';
+}
+renderStops();updateGrad();
+</script>
+            <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        </div>
+    </main>
+    <footer><p><a href="../sitemap.xml">站点地图</a> | DevTools - 程序员在线工具箱</p></footer>
+</body>
+</html>
