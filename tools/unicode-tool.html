@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicode在线转换工具 - 中文Unicode编码解码 | DevTools</title>
+    <meta name="description" content="免费Unicode在线转换工具，支持中文与Unicode编码双向转换，UTF-8进制查看分析，纯前端处理保障数据隐私，适用于国际化开发、编码调试。">
+    <meta name="keywords" content="Unicode转换,中文转Unicode,Unicode解码,UTF-8查看,汉字编码,Unicode工具,编码转换,字符串编码,字符编码工具">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/unicode-tool.html">
+    <meta property="og:title" content="Unicode在线转换工具 - 中文Unicode编码解码 | DevTools">
+    <meta property="og:description" content="免费Unicode在线转换工具，支持中文与Unicode编码双向转换，UTF-8进制查看分析，纯前端处理保障数据隐私，适用于国际化开发、编码调试。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/unicode-tool.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Unicode在线转换工具 - 中文Unicode编码解码 | DevTools">
+    <meta name="twitter:description" content="免费Unicode在线转换工具，支持中文与Unicode编码双向转换，UTF-8进制查看分析，纯前端处理保障数据隐私，适用于国际化开发、编码调试。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>Unicode 编码工具</h1>
+        <p style="color:#666;margin-bottom:20px;">中文与Unicode互转，UTF-8进制查看</p>
+        <div class="tool-body">
+            <div class="tool-ui">
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+        <button class="tool-btn active" onclick="setMode('encode')">中文→Unicode</button>
+        <button class="tool-btn" onclick="setMode('decode')">Unicode→中文</button>
+        <button class="tool-btn" onclick="setMode('hex')">进制查看</button>
+    </div>
+    <textarea id="uniInput" placeholder="输入文本..." style="width:100%%;height:150px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;resize:vertical;"></textarea>
+    <div style="display:flex;gap:8px;margin:10px 0;flex-wrap:wrap;">
+        <button class="tool-btn" onclick="process()">执行</button>
+        <button class="tool-btn" onclick="copyResult()">复制结果</button>
+        <button class="tool-btn" onclick="clearAll()">清空</button>
+    </div>
+    <textarea id="uniOutput" readonly placeholder="输出结果..." style="width:100%%;height:150px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;background:#f9f9f9;resize:vertical;"></textarea>
+    <div id="uniInfo" style="margin-top:12px;padding:10px;background:#f0f4ff;border-radius:6px;font-size:13px;color:#333;display:none;"></div>
+</div>
+<script>
+let um='encode';
+function setMode(m){um=m;document.querySelectorAll('.tool-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+function process(){
+    const inp=document.getElementById('uniInput').value;
+    const info=document.getElementById('uniInfo');
+    info.style.display='none';
+    let out='';
+    if(um==='encode'){
+        out=[...inp].map(c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0')).join('');
+    }else if(um==='decode'){
+        out=inp.replace(/\\u[0-9a-fA-F]{4}/g,m=>String.fromCharCode(parseInt(m.slice(2),16)));
+    }else{
+        const chars=[...inp];
+        let html='<table style="width:100%;font-family:monospace;font-size:12px;border-collapse:collapse;"><tr style="background:#e0e7ff;"><th>字符</th><th>Unicode</th><th>UTF-8(hex)</th><th>十进制</th></tr>';
+        chars.forEach(c=>{
+            const cp=c.charCodeAt(0);
+            const uni='U+'+cp.toString(16).toUpperCase().padStart(4,'0');
+            const utf8=new TextEncoder().encode(c);
+            const hex=[...utf8].map(b=>b.toString(16).padStart(2,'0')).join(' ');
+            html+='<tr><td style="padding:4px;border:1px solid #ddd;font-size:20px">'+c+'</td><td style="padding:4px;border:1px solid #ddd;">'+uni+'</td><td style="padding:4px;border:1px solid #ddd;">'+hex+'</td><td style="padding:4px;border:1px solid #ddd;">'+cp+'</td></tr>';
+        });
+        html+='</table>';
+        info.innerHTML=html;
+        info.style.display='block';
+        out='已显示进制信息(见下方表格)';
+    }
+    document.getElementById('uniOutput').value=out;
+}
+function copyResult(){const v=document.getElementById('uniOutput').value;if(!v||v.includes('进制信息'))return;navigator.clipboard.writeText(v);}
+function clearAll(){document.getElementById('uniInput').value='';document.getElementById('uniOutput').value='';document.getElementById('uniInfo').style.display='none';}
+</script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
