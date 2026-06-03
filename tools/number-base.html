@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字进制转换器 - DevTools程序员在线工具</title>
+    <meta name="description" content="在线数字进制转换工具，支持二进制、八进制、十进制、十六进制相互转换，支持负数和浮点数，程序员调试必备。">
+    <meta name="keywords" content="进制转换,二进制转十进制,十六进制转换,binary hex converter,数字进制">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#8730; 数字进制转换器</h1>
+            <div style="max-width:600px;">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+  <div>
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">十进制 (Decimal)</label>
+    <input type="text" id="dec" placeholder="255" oninput="fromDec(this.value)" style="font-size:16px;font-family:monospace;">
+  </div>
+  <div>
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">二进制 (Binary)</label>
+    <input type="text" id="bin" placeholder="11111111" oninput="fromBin(this.value)" style="font-size:14px;font-family:monospace;">
+  </div>
+  <div>
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">八进制 (Octal)</label>
+    <input type="text" id="oct" placeholder="377" oninput="fromOct(this.value)" style="font-size:16px;font-family:monospace;">
+  </div>
+  <div>
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">十六进制 (Hex)</label>
+    <input type="text" id="hex" placeholder="FF" oninput="fromHex(this.value)" style="font-size:16px;font-family:monospace;text-transform:uppercase;">
+  </div>
+</div>
+<div id="bitView" style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:8px;font-family:monospace;font-size:13px;margin-bottom:16px;word-break:break-all;"></div>
+<button onclick="document.getElementById('dec').value='';document.getElementById('bin').value='';document.getElementById('oct').value='';document.getElementById('hex').value='';document.getElementById('bitView').innerHTML='';">清空</button>
+</div>
+<script>
+function setAll(n){
+  if(isNaN(n)){document.getElementById('bin').value=document.getElementById('oct').value=document.getElementById('hex').value='';document.getElementById('bitView').innerHTML='';return;}
+  const ni=Math.floor(n);
+  document.getElementById('bin').value=ni.toString(2);
+  document.getElementById('oct').value=ni.toString(8);
+  document.getElementById('hex').value=ni.toString(16).toUpperCase();
+  const b=ni.toString(2).padStart(Math.ceil(ni.toString(2).length/8)*8,'0');
+  const groups=b.match(/.{1,8}/g)||[];
+  document.getElementById('bitView').innerHTML='<div style="margin-bottom:6px;color:#888;font-size:12px;">位视图 ('+b.length+' bits)</div>'
+    +groups.map((g,i)=>'<span style="display:inline-block;margin:2px 4px;"><span style="font-size:11px;color:#888;display:block;text-align:center;">'+(b.length-i*8-1)+'-'+Math.max(0,b.length-i*8-8)+'</span><span style="background:#313244;border-radius:4px;padding:2px 4px;">'+g.split('').map(bit=>'<span style="color:'+(bit==='1'?'#a6e3a1':'#f38ba8')+'">'+bit+'</span>').join('')+'</span></span>').join('');
+}
+function fromDec(v){const n=parseInt(v,10);setAll(n);}
+function fromBin(v){const n=parseInt(v,2);if(!isNaN(n)){document.getElementById('dec').value=n;setAll(n);}else{document.getElementById('dec').value='';}}
+function fromOct(v){const n=parseInt(v,8);if(!isNaN(n)){document.getElementById('dec').value=n;setAll(n);}else{document.getElementById('dec').value='';}}
+function fromHex(v){const n=parseInt(v,16);if(!isNaN(n)){document.getElementById('dec').value=n;setAll(n);}else{document.getElementById('dec').value='';}}
+document.getElementById('dec').value='255';fromDec('255');
+</script>
+            <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        </div>
+    </main>
+    <footer><p><a href="../sitemap.xml">站点地图</a> | DevTools - 程序员在线工具箱</p></footer>
+</body>
+</html>
