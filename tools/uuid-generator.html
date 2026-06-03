@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUID在线生成器 - UUID v4/v7 批量生成工具 | DevTools</title>
+    <meta name="description" content="免费在线UUID生成器，支持UUID v4(随机)、v7(按时间排序)、大写格式、Nil UUID，最多一次批量生成100个，纯浏览器端生成，零数据上传。">
+    <meta name="keywords" content="UUID生成,UUID,UUID v4,UUID v7,GUID生成,批量UUID,随机ID生成器,唯一标识符,universally unique identifier,在线UUID工具">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/uuid-generator.html">
+    <meta property="og:title" content="UUID在线生成器 - UUID v4/v7 批量生成工具 | DevTools">
+    <meta property="og:description" content="免费在线UUID生成器，支持UUID v4(随机)、v7(按时间排序)、大写格式、Nil UUID，最多一次批量生成100个，纯浏览器端生成，零数据上传。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/uuid-generator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="UUID在线生成器 - UUID v4/v7 批量生成工具 | DevTools">
+    <meta name="twitter:description" content="免费在线UUID生成器，支持UUID v4(随机)、v7(按时间排序)、大写格式、Nil UUID，最多一次批量生成100个，纯浏览器端生成，零数据上传。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>UUID 生成器</h1>
+        <p style="color:#666;margin-bottom:20px;">批量生成UUID v4/v7，支持100个同时生成</p>
+        <div class="tool-body">
+            <div class="tool-ui">
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+        <label>版本:
+            <select id="uuidVer" style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;">
+                <option value="v4">UUID v4 (随机)</option>
+                <option value="v4upper">UUID v4 (大写)</option>
+                <option value="v7">UUID v7 (按时间排序)</option>
+                <option value="nil">Nil UUID (全零)</option>
+            </select>
+        </label>
+        <label>数量: <input type="number" id="uuidCount" value="1" min="1" max="100" style="width:60px;padding:4px 8px;border:1px solid #ddd;border-radius:4px;"></label>
+        <button class="tool-btn" onclick="generate()">生成</button>
+        <button class="tool-btn" onclick="copyAll()">复制全部</button>
+    </div>
+    <div style="font-size:11px;color:#888;margin-bottom:8px;">
+        <span id="uuidStats"></span>
+    </div>
+    <textarea id="uuidOutput" readonly style="width:100%%;height:300px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;background:#f9f9f9;resize:vertical;"></textarea>
+</div>
+<script>
+function uuidV4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=crypto.getRandomValues(new Uint8Array(1))[0]%%16;const v=c==='x'?r:(r&0x3)|0x8;return v.toString(16);});}
+function uuidV7(){
+    const now=Date.now();
+    const hex=now.toString(16).padStart(12,'0');
+    const rand1=Array.from(crypto.getRandomValues(new Uint8Array(4))).map(b=>b.toString(16).padStart(2,'0')).join('');
+    const rand2=Array.from(crypto.getRandomValues(new Uint8Array(2))).map(b=>b.toString(16).padStart(2,'0')).join('');
+    const rand3=Array.from(crypto.getRandomValues(new Uint8Array(6))).map(b=>b.toString(16).padStart(2,'0')).join('');
+    const timeMid=hex.slice(4,8);
+    const timeHi=hex.slice(0,4);
+    return timeHi+'-'+timeMid+'-7'+hex.slice(8)+'-8'+rand2+'-'+rand1+rand3;
+}
+function generate(){
+    const ver=document.getElementById('uuidVer').value;
+    const count=parseInt(document.getElementById('uuidCount').value)||1;
+    const output=document.getElementById('uuidOutput');
+    const stats=document.getElementById('uuidStats');
+    const lines=[];
+    for(let i=0;i<count;i++){
+        let u='';
+        if(ver==='v4') u=uuidV4();
+        else if(ver==='v4upper') u=uuidV4().toUpperCase();
+        else if(ver==='v7') u=uuidV7();
+        else if(ver==='nil') u='00000000-0000-0000-0000-000000000000';
+        lines.push(u);
+    }
+    output.value=lines.join('\n');
+    stats.textContent='共 '+count+' 个UUID';
+}
+function copyAll(){const v=document.getElementById('uuidOutput').value;if(!v)return;navigator.clipboard.writeText(v).then(()=>alert('已复制 '+v.split('\n').length+' 个UUID!'));}
+</script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
