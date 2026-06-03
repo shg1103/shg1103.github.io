@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调色板生成器 - 在线配色方案/色板生成工具 | DevTools</title>
+    <meta name="description" content="免费在线调色板生成器，支持邻近色、互补色、三角色、柔和色、随机五种配色方案，点击色值一键复制，支持导出CSS变量，适用于UI设计、前端开发、品牌配色。">
+    <meta name="keywords" content="调色板生成,配色方案,色板,颜色搭配,色彩方案,邻近色,互补色,UI配色,设计师工具,color palette,调色板,颜色生成器">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/palette-generator.html">
+    <meta property="og:title" content="调色板生成器 - 在线配色方案/色板生成工具 | DevTools">
+    <meta property="og:description" content="免费在线调色板生成器，支持邻近色、互补色、三角色、柔和色、随机五种配色方案，点击色值一键复制，支持导出CSS变量，适用于UI设计、前端开发、品牌配色。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/palette-generator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="调色板生成器 - 在线配色方案/色板生成工具 | DevTools">
+    <meta name="twitter:description" content="免费在线调色板生成器，支持邻近色、互补色、三角色、柔和色、随机五种配色方案，点击色值一键复制，支持导出CSS变量，适用于UI设计、前端开发、品牌配色。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>调色板生成器</h1>
+        <p style="color:#666;margin-bottom:20px;">邻近/互补/三角/柔和/随机配色，一键复制CSS</p>
+        <div class="tool-body">
+            <div class="tool-ui">
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+        <button class="tool-btn" onclick="generateScheme('analogous')">邻近色</button>
+        <button class="tool-btn" onclick="generateScheme('complementary')">互补色</button>
+        <button class="tool-btn" onclick="generateScheme('triadic')">三角色</button>
+        <button class="tool-btn" onclick="generateScheme('random')">随机</button>
+        <button class="tool-btn" onclick="generateScheme('pastel')">柔和色</button>
+    </div>
+    <div id="palette" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+        <button class="tool-btn" onclick="exportCSS()">导出 CSS 变量</button>
+        <button class="tool-btn" onclick="copyAll()">复制所有色值</button>
+    </div>
+    <div id="paletteExport" style="margin-top:12px;display:none;">
+        <div style="font-size:13px;font-weight:600;color:#333;margin-bottom:6px;">CSS 变量:</div>
+        <textarea id="cssExport" readonly style="width:100%%;height:100px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:12px;background:#f9f9f9;"></textarea>
+        <button class="tool-btn" style="margin-top:6px;" onclick="copyCss()">复制 CSS</button>
+    </div>
+</div>
+<script>
+function hslToHex(h,s,l){
+    s/=100;l/=100;
+    const a=s*Math.min(l,1-l);
+    const f=n=>{const k=(n+h/30)%%12;return l-a*Math.max(Math.min(k-3,9-k,1),-1);};
+    const toHex=x=>Math.round(255*f(x)).toString(16).padStart(2,'0');
+    return '#'+toHex(0)+toHex(8)+toHex(4);
+}
+function generateScheme(type){
+    const palette=document.getElementById('palette');
+    const exportDiv=document.getElementById('paletteExport');
+    exportDiv.style.display='none';
+    let colors=[];
+    const hue=Math.floor(Math.random()*360);
+    const sat=type==='pastel'?30+Math.floor(Math.random()*20):60+Math.floor(Math.random()*30);
+    const lig=type==='pastel'?75+Math.floor(Math.random()*15):45+Math.floor(Math.random()*30);
+    if(type==='analogous'){
+        for(let i=-2;i<=2;i++){
+            const h=((hue+i*30)+360)%%360;
+            colors.push(hslToHex(h,sat,lig-((i===0?0:Math.abs(i)*3))));
+        }
+    }else if(type==='complementary'){
+        colors.push(hslToHex(hue,sat,lig));
+        colors.push(hslToHex((hue+180)%%360,sat,lig));
+        colors.push(hslToHex(hue,sat,lig-8));
+        colors.push(hslToHex((hue+180)%%360,sat,lig-8));
+        colors.push(hslToHex(hue,sat+5,lig+5));
+    }else if(type==='triadic'){
+        colors.push(hslToHex(hue,sat,lig));
+        colors.push(hslToHex((hue+120)%%360,sat,lig-5));
+        colors.push(hslToHex((hue+240)%%360,sat,lig-5));
+        colors.push(hslToHex((hue+60)%%360,sat-10,lig+10));
+        colors.push(hslToHex((hue+180)%%360,sat-10,lig+10));
+    }else if(type==='pastel'){
+        for(let i=0;i<5;i++) colors.push(hslToHex((hue+i*72)%%360,40,80));
+    }else{
+        for(let i=0;i<5;i++) colors.push(hslToHex(Math.floor(Math.random()*360),50+Math.floor(Math.random()*40),40+Math.floor(Math.random()*30)));
+    }
+    palette.innerHTML='';
+    colors.forEach(c=>{
+        const div=document.createElement('div');
+        div.style.cssText='flex:1;min-width:120px;border-radius:8px;padding:24px 12px;text-align:center;cursor:pointer;transition:transform .2s;';
+        div.style.background=c;
+        div.style.color=isLight(c)?'#333':'#fff';
+        div.innerHTML='<div style="font-size:11px;font-weight:600;margin-bottom:4px;">'+c+'</div><div style="font-size:10px;opacity:.7;font-family:monospace;letter-spacing:1px;">click to copy</div>';
+        div.onclick=function(){navigator.clipboard.writeText(c).then(()=>{const t=this.innerHTML;this.innerHTML='<div style="font-size:11px;">Copied!</div>';setTimeout(()=>this.innerHTML=t,800);});};
+        palette.appendChild(div);
+    });
+}
+function isLight(hex){const v=parseInt(hex.slice(1),16);const r=(v>>16)&255,g=(v>>8)&255,b=v&255;return(r*299+g*587+b*114)/1000>128;}
+function exportCSS(){
+    const palette=document.getElementById('palette');
+    const exportDiv=document.getElementById('paletteExport');
+    const cssOut=document.getElementById('cssExport');
+    const cards=palette.querySelectorAll('div');
+    if(cards.length===0)return;
+    let css=':root {\n';
+    cards.forEach((card,i)=>{
+        const color=card.innerHTML.match(/^<div[^>]*>([^<]+)<\/div>/);
+        if(color) css+='  --palette-'+(i+1)+': '+color[1]+';\n';
+    });
+    css+='}';
+    cssOut.value=css;
+    exportDiv.style.display='block';
+}
+function copyCss(){const v=document.getElementById('cssExport').value;if(!v)return;navigator.clipboard.writeText(v).then(()=>alert('CSS 已复制!'));}
+function copyAll(){
+    const cards=document.querySelectorAll('#palette > div');
+    if(cards.length===0)return;
+    const colors=[];
+    cards.forEach(card=>{
+        const m=card.innerHTML.match(/^<div[^>]*>([^<]+)<\/div>/);
+        if(m) colors.push(m[1]);
+    });
+    navigator.clipboard.writeText(colors.join(', ')).then(()=>alert('已复制 '+colors.length+' 个色值!'));
+}
+</script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
