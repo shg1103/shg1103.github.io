@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP 状态码查询 - DevTools程序员在线工具</title>
+    <meta name="description" content="完整的 HTTP 状态码查询手册，包含 1xx、2xx、3xx、4xx、5xx 所有状态码的含义和使用场景，开发者必备工具。">
+    <meta name="keywords" content="http状态码,http status code,404,200,500,301重定向,http错误码">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#127760; HTTP 状态码查询</h1>
+            <div>
+<div style="margin-bottom:20px;">
+  <input type="text" id="searchInput" placeholder="搜索状态码或关键词，如 404、redirect、forbidden..." style="font-size:15px;padding:12px 16px;" oninput="filterCodes()">
+</div>
+<div id="codeList"></div>
+</div>
+<script>
+const codes=[
+  {code:100,name:'Continue',zh:'继续',desc:'服务器已收到请求头，客户端应继续发送请求体',type:'1xx'},
+  {code:101,name:'Switching Protocols',zh:'切换协议',desc:'服务器已同意切换协议，如升级到 WebSocket',type:'1xx'},
+  {code:200,name:'OK',zh:'成功',desc:'请求成功，服务器返回了请求的资源',type:'2xx'},
+  {code:201,name:'Created',zh:'已创建',desc:'请求成功且服务器创建了新的资源（POST/PUT）',type:'2xx'},
+  {code:202,name:'Accepted',zh:'已接受',desc:'服务器已接受请求但尚未处理',type:'2xx'},
+  {code:204,name:'No Content',zh:'无内容',desc:'请求成功但响应不含任何内容，常用于 DELETE 请求',type:'2xx'},
+  {code:206,name:'Partial Content',zh:'部分内容',desc:'服务器成功处理了部分 GET 请求（断点续传）',type:'2xx'},
+  {code:301,name:'Moved Permanently',zh:'永久重定向',desc:'请求的资源已永久移动到新 URL，搜索引擎会更新链接',type:'3xx'},
+  {code:302,name:'Found',zh:'临时重定向',desc:'资源临时移动，客户端应继续使用原有 URL',type:'3xx'},
+  {code:304,name:'Not Modified',zh:'未修改',desc:'资源未修改，客户端可使用缓存版本',type:'3xx'},
+  {code:307,name:'Temporary Redirect',zh:'临时重定向',desc:'临时重定向，方法和消息主体不会改变',type:'3xx'},
+  {code:308,name:'Permanent Redirect',zh:'永久重定向',desc:'永久重定向，方法和消息主体不会改变',type:'3xx'},
+  {code:400,name:'Bad Request',zh:'错误请求',desc:'服务器无法理解请求，请求语法错误或参数非法',type:'4xx'},
+  {code:401,name:'Unauthorized',zh:'未授权',desc:'请求需要用户验证，返回 WWW-Authenticate 头',type:'4xx'},
+  {code:403,name:'Forbidden',zh:'禁止访问',desc:'服务器理解请求但拒绝执行，权限不足',type:'4xx'},
+  {code:404,name:'Not Found',zh:'未找到',desc:'服务器找不到请求的资源，URL 不存在或资源已删除',type:'4xx'},
+  {code:405,name:'Method Not Allowed',zh:'方法不允许',desc:'请求中指定的方法不被允许',type:'4xx'},
+  {code:408,name:'Request Timeout',zh:'请求超时',desc:'服务器等待请求超时',type:'4xx'},
+  {code:409,name:'Conflict',zh:'冲突',desc:'请求与当前服务器状态冲突，如版本冲突',type:'4xx'},
+  {code:410,name:'Gone',zh:'已删除',desc:'请求的资源已永久删除且不会再出现',type:'4xx'},
+  {code:413,name:'Payload Too Large',zh:'请求体过大',desc:'请求实体超过服务器处理能力的限制',type:'4xx'},
+  {code:422,name:'Unprocessable Entity',zh:'无法处理的实体',desc:'请求格式正确但含有语义错误（如表单验证失败）',type:'4xx'},
+  {code:429,name:'Too Many Requests',zh:'请求过多',desc:'用户在给定时间内发送了太多请求（限流）',type:'4xx'},
+  {code:500,name:'Internal Server Error',zh:'服务器内部错误',desc:'服务器遇到未知错误，无法完成请求',type:'5xx'},
+  {code:501,name:'Not Implemented',zh:'未实现',desc:'服务器不支持请求中所用的方法',type:'5xx'},
+  {code:502,name:'Bad Gateway',zh:'网关错误',desc:'作为网关的服务器从上游服务器收到无效响应',type:'5xx'},
+  {code:503,name:'Service Unavailable',zh:'服务不可用',desc:'服务器暂时无法处理请求，通常是过载或维护',type:'5xx'},
+  {code:504,name:'Gateway Timeout',zh:'网关超时',desc:'作为网关的服务器未能及时从上游服务器获得响应',type:'5xx'},
+  {code:505,name:'HTTP Version Not Supported',zh:'HTTP版本不支持',desc:'服务器不支持请求中使用的 HTTP 版本',type:'5xx'},
+];
+const colors={'1xx':'#64748b','2xx':'#16a34a','3xx':'#2563eb','4xx':'#d97706','5xx':'#dc2626'};
+function render(list){
+  const groups={'1xx':[],'2xx':[],'3xx':[],'4xx':[],'5xx':[]};
+  list.forEach(c=>groups[c.type]&&groups[c.type].push(c));
+  const names={'1xx':'信息响应','2xx':'成功','3xx':'重定向','4xx':'客户端错误','5xx':'服务器错误'};
+  return Object.entries(groups).filter(([,v])=>v.length).map(([k,v])=>'<div style="margin-bottom:20px;"><h3 style="font-size:14px;font-weight:700;color:'+colors[k]+';margin-bottom:10px;padding-left:4px;border-left:3px solid '+colors[k]+';">'+k+' '+names[k]+'</h3>'
+    +v.map(c=>'<div style="background:#f8f8f8;border-radius:8px;padding:12px 16px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;"><span style="font-size:20px;font-weight:700;color:'+colors[k]+';min-width:48px;font-family:monospace;">'+c.code+'</span><div><div style="font-weight:600;font-size:14px;">'+c.zh+' <span style="font-size:12px;color:#888;font-weight:400;">('+c.name+')</span></div><div style="font-size:13px;color:#666;margin-top:2px;">'+c.desc+'</div></div></div>').join('')+'</div>').join('');
+}
+function filterCodes(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const filtered=codes.filter(c=>String(c.code).includes(q)||c.name.toLowerCase().includes(q)||c.zh.includes(q)||c.desc.includes(q));
+  document.getElementById('codeList').innerHTML=render(filtered)||'<p style="color:#888;text-align:center;padding:40px 0;">未找到相关状态码</p>';
+}
+document.getElementById('codeList').innerHTML=render(codes);
+</script>
+            <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        </div>
+    </main>
+    <footer><p><a href="../sitemap.xml">站点地图</a> | DevTools - 程序员在线工具箱</p></footer>
+</body>
+</html>
