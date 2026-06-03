@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum生成器 - 在线占位文本/假文生成工具 | DevTools</title>
+    <meta name="description" content="免费在线Lorem Ipsum占位文本生成器，支持段落/句子/单词三种模式，中文古风/拉丁文两种风格，自定义数量，适用于UI设计稿填充、排版测试、页面原型。">
+    <meta name="keywords" content="Lorem Ipsum生成,占位文本,假文生成,中文假文,排版占位,段落生成,文本填充,设计占位,placeholder text,lorem generator">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/lorem-ipsum.html">
+    <meta property="og:title" content="Lorem Ipsum生成器 - 在线占位文本/假文生成工具 | DevTools">
+    <meta property="og:description" content="免费在线Lorem Ipsum占位文本生成器，支持段落/句子/单词三种模式，中文古风/拉丁文两种风格，自定义数量，适用于UI设计稿填充、排版测试、页面原型。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/lorem-ipsum.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lorem Ipsum生成器 - 在线占位文本/假文生成工具 | DevTools">
+    <meta name="twitter:description" content="免费在线Lorem Ipsum占位文本生成器，支持段落/句子/单词三种模式，中文古风/拉丁文两种风格，自定义数量，适用于UI设计稿填充、排版测试、页面原型。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>Lorem Ipsum 生成器</h1>
+        <p style="color:#666;margin-bottom:20px;">占位文本生成，支持中文古风/拉丁文</p>
+        <div class="tool-body">
+            <div class="tool-ui">
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+        <label>生成方式:
+            <select id="loremMode" style="padding:6px 10px;border:1px solid #ddd;border-radius:4px;">
+                <option value="paragraph">段落</option>
+                <option value="sentence">句子</option>
+                <option value="words">单词</option>
+            </select>
+        </label>
+        <label>数量: <input type="number" id="loremCount" value="3" min="1" max="50" style="width:60px;padding:6px 8px;border:1px solid #ddd;border-radius:4px;"></label>
+        <label><input type="checkbox" id="loremCN" checked> 中文版</label>
+        <button class="tool-btn" onclick="generate()">生成</button>
+        <button class="tool-btn" onclick="copyLorem()">复制</button>
+    </div>
+    <textarea id="loremOutput" readonly style="width:100%%;height:300px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:serif;font-size:14px;background:#f9f9f9;resize:vertical;line-height:1.8;color:#333;"></textarea>
+    <div style="font-size:11px;color:#888;margin-top:6px;text-align:right;" id="loremStats"></div>
+</div>
+<script>
+const LOREM_LATIN='Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'.split(' ');
+const LOREM_CN=['云深不知处','静以修身俭以养德','学而时习之不亦说乎','温故而知新','三人行必有我师','千里之行始于足下','天行健君子以自强不息','路漫漫其修远兮','山重水复疑无路','柳暗花明又一村','海内存知己天涯若比邻','欲穷千里目更上一层楼','随风潜入夜润物细无声','会当凌绝顶一览众山小','不以物喜不以己悲','先天下之忧而忧','后天下之乐而乐','青出于蓝而胜于蓝','熟读唐诗三百首','腹有诗书气自华','纸上得来终觉浅','绝知此事要躬行'];
+function generate(){
+    const mode=document.getElementById('loremMode').value;
+    const count=parseInt(document.getElementById('loremCount').value)||3;
+    const cn=document.getElementById('loremCN').checked;
+    const out=document.getElementById('loremOutput');
+    const stats=document.getElementById('loremStats');
+    let result='';
+    if(cn){
+        if(mode==='paragraph'){
+            const p=['程序设计是一门艺术，也是一门科学。在数字时代，掌握编程能力就像拥有了创造世界的魔法。每一个优秀的程序都是从一行简洁的代码开始的。',
+            '用户体验是产品成功的关键因素之一。一个好的界面应该让用户直觉地完成操作，而不需要阅读说明书。简洁、美观、高效的交互设计是现代应用的核心竞争力。',
+            '数据结构与算法是编程的基础。无论是处理海量数据还是优化系统性能，选择合适的数据结构和算法往往能事半功倍。学好基础，才能走得更远。',
+            '云计算技术正在改变企业的IT架构。从传统的本地部署到云端原生应用，企业可以更灵活地扩展业务，降低运维成本，专注于核心业务创新。',
+            '网络安全不容忽视。随着数字化程度加深，数据泄露和网络攻击事件频发。采用零信任架构、定期安全审计、加强员工安全意识培训是必要措施。'];
+            result='';
+            for(let i=0;i<count;i++) result+='    '+p[i%%p.length]+'\n\n';
+        }else if(mode==='sentence'){
+            const s=['编程是一门艺术。','好的代码胜过万言注释。','用户体验决定产品命运。','算法是程序的灵魂。','简洁是最高级的复杂。','安全永远不应该事后弥补。','测试是质量的保证。','持续集成提升开发效率。'];
+            result='';
+            for(let i=0;i<count;i++) result+=s[i%%s.length]+'\n';
+        }else{
+            const w='设计 代码 算法 架构 前端 后端 数据 安全 测试 部署 性能 优化 接口 模块 缓存 异步 并发 容器 微服务 云原生'.split(' ');
+            result='';
+            for(let i=0;i<count;i++) result+=w[i%%w.length]+' ';
+        }
+    }else{
+        if(mode==='paragraph'){
+            const len=Math.min(count,10);
+            for(let p=0;p<count;p++){
+                const wordsPerP=30+Math.floor(Math.random()*40);
+                let para='';
+                for(let i=0;i<wordsPerP;i++){
+                    const w=LOREM_LATIN[Math.floor(Math.random()*LOREM_LATIN.length)];
+                    if(i===0) para+=w.charAt(0).toUpperCase()+w.slice(1)+' ';
+                    else para+=w+' ';
+                }
+                result+=para.trim()+'.\n\n';
+            }
+        }else if(mode==='sentence'){
+            for(let i=0;i<count;i++){
+                let s='';
+                const words=5+Math.floor(Math.random()*10);
+                for(let j=0;j<words;j++){
+                    const w=LOREM_LATIN[Math.floor(Math.random()*LOREM_LATIN.length)];
+                    s+=j===0?w.charAt(0).toUpperCase()+w.slice(1):w;
+                    s+=' ';
+                }
+                result+=s.trim()+'.\n';
+            }
+        }else{
+            for(let i=0;i<count;i++) result+=LOREM_LATIN[Math.floor(Math.random()*LOREM_LATIN.length)]+' ';
+        }
+    }
+    out.value=result.trim();
+    const charCount=result.trim().length;
+    stats.textContent='共 '+charCount+' 字符 | '+(cn?'中文版':'Latin')+' | '+mode;
+}
+function copyLorem(){const v=document.getElementById('loremOutput').value;if(!v)return;navigator.clipboard.writeText(v).then(()=>alert('已复制!'));}
+</script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
