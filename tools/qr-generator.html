@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二维码生成器 - DevTools程序员在线工具</title>
+    <meta name="description" content="免费在线二维码生成器，输入文字或URL即可生成二维码，支持下载PNG，无需注册。">
+    <meta name="keywords" content="二维码生成器,qr code generator,二维码在线生成,url二维码">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>#QR 二维码生成器</h1>
+            <div style="max-width:600px;">
+<div style="margin-bottom:16px;">
+  <label style="font-weight:600;display:block;margin-bottom:8px;">输入内容（文字或网址）</label>
+  <textarea id="qrInput" placeholder="https://shg1103.github.io/" style="min-height:80px;font-size:14px;">https://shg1103.github.io/</textarea>
+</div>
+<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
+  <div>
+    <label style="font-size:13px;font-weight:600;">尺寸</label>
+    <select id="qrSize" style="margin-left:8px;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;">
+      <option value="200">200x200</option>
+      <option value="300" selected>300x300</option>
+      <option value="400">400x400</option>
+      <option value="500">500x500</option>
+    </select>
+  </div>
+  <button onclick="genQR()">生成二维码</button>
+  <button id="dlBtn" onclick="downloadQR()" style="background:#10b981;display:none;">下载 PNG</button>
+</div>
+<div id="qrOut" style="text-align:center;padding:20px;background:#f8f8f8;border-radius:12px;min-height:80px;display:flex;align-items:center;justify-content:center;color:#999;">
+  点击"生成二维码"按钮
+</div>
+</div>
+<script>
+function genQR(){
+  const text=encodeURIComponent(document.getElementById('qrInput').value.trim());
+  const size=document.getElementById('qrSize').value;
+  if(!text){alert('请输入内容');return;}
+  const url='https://api.qrserver.com/v1/create-qr-code/?size='+size+'x'+size+'&data='+text+'&format=png&qzone=2';
+  const out=document.getElementById('qrOut');
+  out.innerHTML='<img src="'+url+'" alt="QR Code" style="max-width:100%;border-radius:8px;" onload="document.getElementById('dlBtn').style.display='inline-block'" onerror="this.parentElement.innerHTML='<span style=color:#e74c3c>生成失败，请检查网络连接</span>'">';
+  window._qrUrl=url;
+}
+function downloadQR(){
+  const a=document.createElement('a');a.href=window._qrUrl;a.download='qrcode.png';a.target='_blank';a.click();
+}
+genQR();
+</script>
+            <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        </div>
+    </main>
+    <footer><p><a href="../sitemap.xml">站点地图</a> | DevTools - 程序员在线工具箱</p></footer>
+</body>
+</html>
