@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL 编码/解码 - DevTools程序员在线工具</title>
+    <meta name="description" content="在线 URL 编码解码工具，支持 encodeURIComponent、encodeURI 和完整的 URL 参数解析，实时转换。">
+    <meta name="keywords" content="url编码,url解码,urlencode,urldecode,encodeURIComponent">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#128279; URL 编码/解码</h1>
+            <div>
+<div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
+  <button onclick="encode()">编码</button>
+  <button onclick="decode()" style="background:#10b981;">解码</button>
+  <button onclick="clearAll()" style="background:#6b7280;">清空</button>
+  <button onclick="parseParams()" style="background:#f59e0b;">解析 URL 参数</button>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+  <div>
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">输入</label>
+    <textarea id="inputText" placeholder="输入需要编码或解码的内容..." style="min-height:180px;font-size:14px;"></textarea>
+  </div>
+  <div>
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">输出</label>
+    <textarea id="outputText" readonly style="min-height:180px;font-size:14px;background:#f8f8f8;"></textarea>
+  </div>
+</div>
+<div id="paramTable" style="display:none;margin-top:16px;">
+  <h3 style="font-size:15px;margin-bottom:12px;">URL 参数解析结果</h3>
+  <div id="paramContent"></div>
+</div>
+</div>
+<script>
+function encode(){
+  const v=document.getElementById('inputText').value;
+  document.getElementById('outputText').value=encodeURIComponent(v);
+}
+function decode(){
+  const v=document.getElementById('inputText').value;
+  try{document.getElementById('outputText').value=decodeURIComponent(v.replace(/\+/g,' '));}
+  catch(e){document.getElementById('outputText').value='解码失败: '+e.message;}
+}
+function clearAll(){document.getElementById('inputText').value='';document.getElementById('outputText').value='';document.getElementById('paramTable').style.display='none';}
+function parseParams(){
+  let url=document.getElementById('inputText').value.trim();
+  try{
+    let u=new URL(url.includes('?')||url.startsWith('http')?url:'http://x?'+url);
+    const params=[...u.searchParams.entries()];
+    const table=document.getElementById('paramContent');
+    if(!params.length){table.innerHTML='<p style="color:#888;">没有找到参数</p>';}
+    else{
+      table.innerHTML='<table style="width:100%;border-collapse:collapse;font-size:13px;">'
+        +'<thead><tr><th style="text-align:left;padding:8px;background:#f0f2f5;border:1px solid #e8e8e8;">参数名</th>'
+        +'<th style="text-align:left;padding:8px;background:#f0f2f5;border:1px solid #e8e8e8;">值（已解码）</th>'
+        +'<th style="text-align:left;padding:8px;background:#f0f2f5;border:1px solid #e8e8e8;">原始值</th></tr></thead><tbody>'
+        +params.map(([k,v])=>'<tr><td style="padding:8px;border:1px solid #e8e8e8;font-family:monospace;">'+escH(k)+'</td><td style="padding:8px;border:1px solid #e8e8e8;">'+escH(v)+'</td><td style="padding:8px;border:1px solid #e8e8e8;font-family:monospace;font-size:12px;color:#888;">'+escH(encodeURIComponent(v))+'</td></tr>').join('')
+        +'</tbody></table>';
+    }
+    document.getElementById('paramTable').style.display='block';
+    if(u.origin!=='http://x') document.getElementById('outputText').value=u.pathname+(u.search||'');
+  }catch(e){alert('请输入有效的 URL 或参数字符串');}
+}
+function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+</script>
+            <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        </div>
+    </main>
+    <footer><p><a href="../sitemap.xml">站点地图</a> | DevTools - 程序员在线工具箱</p></footer>
+</body>
+</html>
