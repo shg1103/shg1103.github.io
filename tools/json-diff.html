@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 差异对比 - DevTools程序员在线工具</title>
+    <meta name="description" content="在线 JSON 差异对比工具，可视化高亮显示两个 JSON 的差异，支持格式化和压缩，方便调试 API 响应变化。">
+    <meta name="keywords" content="json diff,json对比,json差异,json compare,json比较工具">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container">
+        <div class="tool-page">
+            <h1>&#8800; JSON 差异对比</h1>
+            <div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+  <div>
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">JSON A (原始)</label>
+    <textarea id="jsonA" placeholder='{"name":"Alice","age":25}' style="min-height:200px;font-size:13px;font-family:monospace;"></textarea>
+  </div>
+  <div>
+    <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">JSON B (修改后)</label>
+    <textarea id="jsonB" placeholder='{"name":"Alice","age":26,"city":"Beijing"}' style="min-height:200px;font-size:13px;font-family:monospace;"></textarea>
+  </div>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+  <button onclick="diffJSON()">对比差异</button>
+  <button onclick="loadExample()" style="background:#6b7280;">加载示例</button>
+</div>
+<div id="diffResult"></div>
+</div>
+<script>
+function loadExample(){
+  document.getElementById('jsonA').value=JSON.stringify({name:"Alice",age:25,hobbies:["reading","coding"],address:{city:"Shanghai",zip:"200000"}},null,2);
+  document.getElementById('jsonB').value=JSON.stringify({name:"Alice",age:26,hobbies:["reading","gaming"],address:{city:"Beijing",zip:"100000"},email:"alice@example.com"},null,2);
+}
+function deepDiff(a,b,path=''){
+  const diffs=[];
+  const keysA=a&&typeof a==='object'?Object.keys(a):[];
+  const keysB=b&&typeof b==='object'?Object.keys(b):[];
+  const all=[...new Set([...keysA,...keysB])];
+  if(typeof a!=='object'||typeof b!=='object'){
+    if(JSON.stringify(a)!==JSON.stringify(b)) diffs.push({type:'modified',path,oldVal:a,newVal:b});
+    return diffs;
+  }
+  all.forEach(k=>{
+    const kpath=path?(path+'.'+k):k;
+    if(!(k in a)) diffs.push({type:'added',path:kpath,newVal:b[k]});
+    else if(!(k in b)) diffs.push({type:'removed',path:kpath,oldVal:a[k]});
+    else diffs.push(...deepDiff(a[k],b[k],kpath));
+  });
+  return diffs;
+}
+function diffJSON(){
+  try{
+    const a=JSON.parse(document.getElementById('jsonA').value);
+    const b=JSON.parse(document.getElementById('jsonB').value);
+    const diffs=deepDiff(a,b);
+    const res=document.getElementById('diffResult');
+    if(!diffs.length){res.innerHTML='<div style="background:#d1fae5;border-radius:8px;padding:16px;color:#065f46;font-weight:600;">两个 JSON 完全相同，无差异。</div>';return;}
+    const colors={added:'#d1fae5',removed:'#fee2e2',modified:'#fef3c7'};
+    const labels={added:'+ 新增',removed:'- 删除',modified:'~ 修改'};
+    res.innerHTML='<p style="font-size:13px;color:#666;margin-bottom:10px;">发现 '+diffs.length+' 处差异：</p>'
+      +diffs.map(d=>'<div style="background:'+colors[d.type]+';border-radius:8px;padding:12px 16px;margin-bottom:8px;">'
+        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
+        +'<span style="font-size:12px;font-weight:700;color:#374151;">'+labels[d.type]+'</span>'
+        +'<code style="font-size:13px;color:#6366f1;">'+d.path+'</code></div>'
+        +(d.type==='added'?'<div style="font-size:13px;">新值: <code>'+JSON.stringify(d.newVal)+'</code></div>':'')
+        +(d.type==='removed'?'<div style="font-size:13px;">原值: <code>'+JSON.stringify(d.oldVal)+'</code></div>':'')
+        +(d.type==='modified'?'<div style="font-size:13px;"><span style="color:#dc2626;text-decoration:line-through;">'+JSON.stringify(d.oldVal)+'</span> &rarr; <span style="color:#16a34a;">'+JSON.stringify(d.newVal)+'</span></div>':'')
+        +'</div>').join('');
+  }catch(e){document.getElementById('diffResult').innerHTML='<div style="background:#fee2e2;border-radius:8px;padding:16px;color:#dc2626;">JSON 解析失败: '+e.message+'</div>';}
+}
+</script>
+            <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        </div>
+    </main>
+    <footer><p><a href="../sitemap.xml">站点地图</a> | DevTools - 程序员在线工具箱</p></footer>
+</body>
+</html>
