@@ -18,117 +18,167 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DevTools - 最新在线程序员工具矩阵 | JSON格式化、正则测试、二维码生成等22个免费工具">
     <meta name="twitter:description" content="最新在线程序员工具矩阵，提供JSON格式化/校验、正则表达式测试、Base64编解码、SQL格式化、时间戳转换、二维码生成、密码生成器、CSS渐变、MD5/SHA哈希计算等22个免费在线开发工具，无需下载安装，即开即用。">
-
     <link rel="stylesheet" href="css/style.css">
+    <style>
+.category-section { margin-bottom: 32px; }
+.category-header {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 18px; font-weight: 700; color: #333;
+    padding: 10px 14px; border-radius: 10px;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, #f0f0ff 0%, #e8e8ff 100%);
+    border-left: 4px solid #6366f1;
+}
+.category-header .cat-icon { font-size: 22px; }
+.category-header .cat-count {
+    font-size: 12px; color: #888; font-weight: 400;
+    margin-left: auto;
+}
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+.category-grid .tool-card { margin: 0; }
+@media (max-width: 600px) {
+    .category-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+}
+    </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
 </head>
 <body>
     <header><div class="container"><a href="index.html" class="logo">DevTools 工具站</a></div></header>
     <main class="container">
-        <h2 style="margin-bottom:16px;font-size:20px;">&#128736; 全部工具</h2>
-        <div class="tool-grid">
-            <a href="tools/cron-parser.html" class="tool-card">
-                <div class="icon">&#9200;</div>
-                <div class="name">Cron表达式解析器</div>
-                <div class="desc">解析Linux Cron表达式，查看下次执行时间</div>
-            </a>
-            <a href="tools/sql-formatter.html" class="tool-card">
-                <div class="icon">&#128449;</div>
-                <div class="name">SQL格式化工具</div>
-                <div class="desc">一键美化/压缩SQL语句</div>
-            </a>
-            <a href="tools/regex-tester.html" class="tool-card">
-                <div class="icon">&#128269;</div>
-                <div class="name">正则表达式测试器</div>
-                <div class="desc">实时测试正则匹配，支持高亮</div>
-            </a>
-            <a href="tools/json-formatter.html" class="tool-card">
-                <div class="icon">&#128196;</div>
-                <div class="name">JSON格式化/校验</div>
-                <div class="desc">格式化、压缩、校验JSON数据</div>
-            </a>
-            <a href="tools/base64-tool.html" class="tool-card">
-                <div class="icon">&#128272;</div>
-                <div class="name">Base64编解码</div>
-                <div class="desc">文本/文件Base64编码解码</div>
-            </a>
-            <a href="tools/markdown-to-html.html" class="tool-card">
-                <div class="icon">&#128221;</div>
-                <div class="name">Markdown转HTML</div>
-                <div class="desc">实时预览Markdown渲染效果</div>
-            </a>
-            <a href="tools/timestamp-converter.html" class="tool-card">
-                <div class="icon">&#128336;</div>
-                <div class="name">时间戳转换</div>
-                <div class="desc">时间戳与日期互转，支持批量</div>
-            </a>
-            <a href="tools/jwt-decoder.html" class="tool-card">
-                <div class="icon">&#128273;</div>
-                <div class="name">JWT解码器</div>
-                <div class="desc">解析JWT Token的Header/Payload</div>
-            </a>
-            <a href="tools/json-csv-converter.html" class="tool-card">
-                <div class="icon">&#128202;</div>
-                <div class="name">JSON/CSV互转</div>
-                <div class="desc">JSON与CSV格式互相转换</div>
-            </a>
-            <a href="tools/api-tester.html" class="tool-card">
-                <div class="icon">&#127760;</div>
-                <div class="name">API接口测试工具</div>
-                <div class="desc">在线发送HTTP请求，测试API接口</div>
-            </a>
-        
-            <a href="tools/color-converter.html" class="tool-card">
-                <div class="icon">&#127912;</div>
-                <div class="name">颜色转换工具</div>
-                <div class="desc">HEX/RGB/HSL互相转换，实时预览</div>
-            </a>
-            <a href="tools/qr-generator.html" class="tool-card">
-                <div class="icon">&#128195;</div>
-                <div class="name">二维码生成器</div>
-                <div class="desc">输入文字/URL生成QR码，可下载</div>
-            </a>
-            <a href="tools/hash-calculator.html" class="tool-card">
-                <div class="icon">&#128274;</div>
-                <div class="name">Hash计算器</div>
-                <div class="desc">MD5/SHA-1/SHA-256/SHA-512</div>
-            </a>
-            <a href="tools/url-encoder.html" class="tool-card">
-                <div class="icon">&#128279;</div>
-                <div class="name">URL编码/解码</div>
-                <div class="desc">encodeURIComponent、URL参数解析</div>
-            </a>
-            <a href="tools/password-generator.html" class="tool-card">
-                <div class="icon">&#128272;</div>
-                <div class="name">密码生成器</div>
-                <div class="desc">随机强密码，可自定义字符集</div>
-            </a>
-            <a href="tools/text-counter.html" class="tool-card">
-                <div class="icon">&#128209;</div>
-                <div class="name">文字统计工具</div>
-                <div class="desc">字数/字符/行数/段落/阅读时间</div>
-            </a>
-            <a href="tools/http-status.html" class="tool-card">
-                <div class="icon">&#127760;</div>
-                <div class="name">HTTP状态码查询</div>
-                <div class="desc">1xx~5xx完整状态码参考手册</div>
-            </a>
-            <a href="tools/number-base.html" class="tool-card">
-                <div class="icon">&#128290;</div>
-                <div class="name">进制转换器</div>
-                <div class="desc">二进制/八进制/十进制/十六进制互转</div>
-            </a>
-            <a href="tools/json-diff.html" class="tool-card">
-                <div class="icon">&#9878;</div>
-                <div class="name">JSON差异对比</div>
-                <div class="desc">对比两个JSON，高亮差异项</div>
-            </a>
-            <a href="tools/css-gradient.html" class="tool-card">
-                <div class="icon">&#127752;</div>
-                <div class="name">CSS渐变生成器</div>
-                <div class="desc">线性/径向渐变可视化，一键复制CSS</div>
-            </a>
+        <div class="category-section">
+            <div class="category-header">
+                <span class="cat-icon">📝</span>
+                <span>文字与格式化</span>
+                <span class="cat-count">5个工具</span>
+            </div>
+            <div class="category-grid">
+                <a href="tools/json-formatter.html" class="tool-card">
+                    <div class="name">JSON格式化/校验</div>
+                    <div class="desc">格式化、压缩、校验JSON数据</div>
+                </a>
+                <a href="tools/regex-tester.html" class="tool-card">
+                    <div class="name">正则表达式测试器</div>
+                    <div class="desc">实时测试正则匹配，支持高亮</div>
+                </a>
+                <a href="tools/json-diff.html" class="tool-card">
+                    <div class="name">JSON差异对比</div>
+                    <div class="desc">对比两个JSON，高亮差异项</div>
+                </a>
+                <a href="tools/markdown-to-html.html" class="tool-card">
+                    <div class="name">Markdown转HTML</div>
+                    <div class="desc">实时预览Markdown渲染效果</div>
+                </a>
+                <a href="tools/sql-formatter.html" class="tool-card">
+                    <div class="name">SQL格式化工具</div>
+                    <div class="desc">一键美化/压缩SQL语句</div>
+                </a>
+            </div>
         </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <span class="cat-icon">📦</span>
+                <span>编码与转换</span>
+                <span class="cat-count">6个工具</span>
+            </div>
+            <div class="category-grid">
+                <a href="tools/base64-tool.html" class="tool-card">
+                    <div class="name">Base64编解码</div>
+                    <div class="desc">文本/文件Base64编码解码</div>
+                </a>
+                <a href="tools/timestamp-converter.html" class="tool-card">
+                    <div class="name">时间戳转换</div>
+                    <div class="desc">时间戳与日期互转，支持批量</div>
+                </a>
+                <a href="tools/url-encoder.html" class="tool-card">
+                    <div class="name">URL编码/解码</div>
+                    <div class="desc">encodeURIComponent、URL参数解析</div>
+                </a>
+                <a href="tools/color-converter.html" class="tool-card">
+                    <div class="name">颜色转换工具</div>
+                    <div class="desc">HEX/RGB/HSL互相转换，实时预览</div>
+                </a>
+                <a href="tools/json-csv-converter.html" class="tool-card">
+                    <div class="name">JSON/CSV互转</div>
+                    <div class="desc">JSON与CSV格式互相转换</div>
+                </a>
+                <a href="tools/number-base.html" class="tool-card">
+                    <div class="name">进制转换器</div>
+                    <div class="desc">二进制/八进制/十进制/十六进制互转</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <span class="cat-icon">🔒</span>
+                <span>安全与密码</span>
+                <span class="cat-count">2个工具</span>
+            </div>
+            <div class="category-grid">
+                <a href="tools/hash-calculator.html" class="tool-card">
+                    <div class="name">Hash计算器</div>
+                    <div class="desc">MD5/SHA-1/SHA-256/SHA-512</div>
+                </a>
+                <a href="tools/password-generator.html" class="tool-card">
+                    <div class="name">密码生成器</div>
+                    <div class="desc">随机强密码，可自定义字符集</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <span class="cat-icon">🔧</span>
+                <span>开发与调试</span>
+                <span class="cat-count">4个工具</span>
+            </div>
+            <div class="category-grid">
+                <a href="tools/api-tester.html" class="tool-card">
+                    <div class="name">API接口测试工具</div>
+                    <div class="desc">在线发送HTTP请求，测试API接口</div>
+                </a>
+                <a href="tools/http-status.html" class="tool-card">
+                    <div class="name">HTTP状态码查询</div>
+                    <div class="desc">1xx~5xx完整状态码参考手册</div>
+                </a>
+                <a href="tools/jwt-decoder.html" class="tool-card">
+                    <div class="name">JWT解码器</div>
+                    <div class="desc">解析JWT Token的Header/Payload</div>
+                </a>
+                <a href="tools/cron-parser.html" class="tool-card">
+                    <div class="name">Cron表达式解析器</div>
+                    <div class="desc">解析Linux Cron表达式，查看下次执行时间</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <span class="cat-icon">🎨</span>
+                <span>生成与设计</span>
+                <span class="cat-count">3个工具</span>
+            </div>
+            <div class="category-grid">
+                <a href="tools/qr-generator.html" class="tool-card">
+                    <div class="name">二维码生成器</div>
+                    <div class="desc">输入文字/URL生成QR码，可下载</div>
+                </a>
+                <a href="tools/css-gradient.html" class="tool-card">
+                    <div class="name">CSS渐变生成器</div>
+                    <div class="desc">线性/径向渐变可视化，一键复制CSS</div>
+                </a>
+                <a href="tools/text-counter.html" class="tool-card">
+                    <div class="name">文字统计工具</div>
+                    <div class="desc">字数/字符/行数/段落/阅读时间</div>
+                </a>
+            </div>
+        </div>
+
         <div style="margin:24px 0;text-align:center;">
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
