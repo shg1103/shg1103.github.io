@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP地址计算器 - CIDR子网掩码在线计算工具 | DevTools</title>
+    <meta name="description" content="免费在线IP地址计算器，支持CIDR格式输入，计算网络地址、广播地址、子网掩码、可用主机数、地址范围，纯前端计算数据不上传，适用于网络规划。">
+    <meta name="keywords" content="IP计算器,CIDR计算,子网掩码计算,网络地址计算,IP地址,子网规划,网络工具,CIDR在线计算,IP subnet calculator">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/ip-calculator.html">
+    <meta property="og:title" content="IP地址计算器 - CIDR子网掩码在线计算工具 | DevTools">
+    <meta property="og:description" content="免费在线IP地址计算器，支持CIDR格式输入，计算网络地址、广播地址、子网掩码、可用主机数、地址范围，纯前端计算数据不上传，适用于网络规划。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/ip-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IP地址计算器 - CIDR子网掩码在线计算工具 | DevTools">
+    <meta name="twitter:description" content="免费在线IP地址计算器，支持CIDR格式输入，计算网络地址、广播地址、子网掩码、可用主机数、地址范围，纯前端计算数据不上传，适用于网络规划。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>IP 地址计算器</h1>
+        <p style="color:#666;margin-bottom:20px;">CIDR格式子网计算，含网络/广播地址、可用主机数</p>
+        <div class="tool-body">
+            <div class="tool-ui">
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:13px;">IP地址/CIDR:
+            <input type="text" id="ipInput" placeholder="e.g. 192.168.1.0/24" style="width:180px;padding:6px 10px;border:1px solid #ddd;border-radius:4px;font-family:monospace;">
+        </label>
+        <button class="tool-btn" onclick="calc()">计算</button>
+        <button class="tool-btn" onclick="fillSample()">示例</button>
+    </div>
+    <div id="ipResult" style="display:none;">
+        <table style="width:100%%;border-collapse:collapse;font-size:13px;">
+            <tr><td style="padding:8px;border:1px solid #ddd;background:#f0f4ff;font-weight:600;">网络地址</td><td id="ipNetwork" style="padding:8px;border:1px solid #ddd;font-family:monospace;"></td></tr>
+            <tr><td style="padding:8px;border:1px solid #ddd;background:#f0f4ff;font-weight:600;">广播地址</td><td id="ipBroadcast" style="padding:8px;border:1px solid #ddd;font-family:monospace;"></td></tr>
+            <tr><td style="padding:8px;border:1px solid #ddd;background:#f0f4ff;font-weight:600;">子网掩码</td><td id="ipMask" style="padding:8px;border:1px solid #ddd;font-family:monospace;"></td></tr>
+            <tr><td style="padding:8px;border:1px solid #ddd;background:#f0f4ff;font-weight:600;">可用主机数</td><td id="ipHosts" style="padding:8px;border:1px solid #ddd;font-family:monospace;"></td></tr>
+            <tr><td style="padding:8px;border:1px solid #ddd;background:#f0f4ff;font-weight:600;">地址范围</td><td id="ipRange" style="padding:8px;border:1px solid #ddd;font-family:monospace;"></td></tr>
+            <tr><td style="padding:8px;border:1px solid #ddd;background:#f0f4ff;font-weight:600;">CIDR</td><td id="ipCidr" style="padding:8px;border:1px solid #ddd;font-family:monospace;"></td></tr>
+        </table>
+    </div>
+    <div id="ipError" style="color:#e53e3e;margin-top:10px;display:none;"></div>
+</div>
+<script>
+function ip2int(ip){const p=ip.split('.');return ((+p[0]<<24)+(+p[1]<<16)+(+p[2]<<8)+(+p[3]))>>>0;}
+function int2ip(n){return [(n>>>24),(n>>16)&255,(n>>8)&255,n&255].join('.');}
+function calc(){
+    const inp=document.getElementById('ipInput').value.trim();
+    const err=document.getElementById('ipError');
+    err.style.display='none';
+    const r=document.getElementById('ipResult');
+    r.style.display='none';
+    try{
+        const parts=inp.split('/');
+        if(parts.length!==2) throw new Error('格式错误，请使用 CIDR 格式 (如 192.168.1.0/24)');
+        const ip=parts[0].trim();
+        const prefix=parseInt(parts[1]);
+        if(prefix<0||prefix>32) throw new Error('前缀长度必须在 0-32 之间');
+        const ipInt=ip2int(ip);
+        const mask=~0<<(32-prefix);
+        const network=(ipInt&mask)>>>0;
+        const broadcast=(network|~mask)>>>0;
+        const hosts=prefix>=31?0:Math.pow(2,32-prefix)-2;
+        document.getElementById('ipNetwork').textContent=int2ip(network);
+        document.getElementById('ipBroadcast').textContent=int2ip(broadcast);
+        document.getElementById('ipMask').textContent=int2ip(mask);
+        document.getElementById('ipHosts').textContent=hosts.toLocaleString();
+        document.getElementById('ipRange').textContent=int2ip(network)+' ~ '+int2ip(broadcast);
+        document.getElementById('ipCidr').textContent=inp;
+        r.style.display='block';
+    }catch(e){
+        err.textContent=e.message;
+        err.style.display='block';
+    }
+}
+function fillSample(){document.getElementById('ipInput').value='192.168.1.0/24';calc();}
+</script>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
