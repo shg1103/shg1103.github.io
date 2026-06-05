@@ -4,72 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>二维码在线生成器 - 自定义尺寸一键下载PNG | DevTools</title>
-    <meta name="description" content="免费二维码在线生成器，输入文本或URL即可实时生成高清二维码，支持自定义尺寸和颜色，一键下载PNG图片。适用于链接分享、名片、WiFi密码、支付码等场景。">
-    <meta name="keywords" content="二维码生成器,QR码,二维码在线,QR code generator,二维码制作,免费二维码,链接转二维码,在线生成二维码">
+    <meta name="description" content="免费在线二维码生成器，输入文本或URL实时生成高质量二维码，支持自定义尺寸和颜色，一键下载PNG图片，纯前端生成不上传服务器，适用于链接分享、WiFi密码、支付码等场景。">
+    <meta name="keywords" content="二维码生成,QR码,二维码在线,QR code generator,二维码工具,免费二维码,链接转二维码,二维码下载,自定义二维码">
     <meta name="robots" content="index, follow">
     <meta name="author" content="DevTools">
     <link rel="canonical" href="https://shg1103.github.io/tools/qr-generator.html">
     <meta property="og:title" content="二维码在线生成器 - 自定义尺寸一键下载PNG | DevTools">
-    <meta property="og:description" content="免费二维码在线生成器，输入文本或URL即可实时生成高清二维码，支持自定义尺寸和颜色，一键下载PNG图片。适用于链接分享、名片、WiFi密码、支付码等场景。">
+    <meta property="og:description" content="免费在线二维码生成器，输入文本或URL实时生成高质量二维码，支持自定义尺寸和颜色，一键下载PNG图片，纯前端零数据上传。">
     <meta property="og:url" content="https://shg1103.github.io/tools/qr-generator.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="DevTools 在线工具矩阵">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="二维码在线生成器 - 自定义尺寸一键下载PNG | DevTools">
-    <meta name="twitter:description" content="免费二维码在线生成器，输入文本或URL即可实时生成高清二维码，支持自定义尺寸和颜色，一键下载PNG图片。适用于链接分享、名片、WiFi密码、支付码等场景。">
-
+    <meta name="twitter:description" content="免费在线二维码生成器，输入文本或URL实时生成高质量二维码，支持自定义尺寸和颜色。">
     <link rel="stylesheet" href="../css/style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+<style>
+.qr-controls { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+.qr-controls label { font-size: 13px; font-weight: 600; }
+.qr-controls select, .qr-controls input[type=color] { margin-left: 6px; padding: 4px 8px; border: 1px solid #ddd; border-radius: 6px; }
+.qr-canvas-wrap { text-align: center; padding: 30px; background: #f8f8f8; border-radius: 12px; min-height: 220px; display: flex; align-items: center; justify-content: center; }
+</style>
 </head>
 <body>
     <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
-    <main class="container">
-        <div class="tool-page">
-            <h1>#QR 二维码生成器</h1>
-            <div style="max-width:600px;">
-<div style="margin-bottom:16px;">
-  <label style="font-weight:600;display:block;margin-bottom:8px;">输入内容（文字或网址）</label>
-  <textarea id="qrInput" placeholder="https://shg1103.github.io/" style="min-height:80px;font-size:14px;">https://shg1103.github.io/</textarea>
-</div>
-<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
-  <div>
-    <label style="font-size:13px;font-weight:600;">尺寸</label>
-    <select id="qrSize" style="margin-left:8px;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;">
-      <option value="200">200x200</option>
-      <option value="300" selected>300x300</option>
-      <option value="400">400x400</option>
-      <option value="500">500x500</option>
-    </select>
-  </div>
-  <button onclick="genQR()">生成二维码</button>
-  <button id="dlBtn" onclick="downloadQR()" style="background:#10b981;display:none;">下载 PNG</button>
-</div>
-<div id="qrOut" style="text-align:center;padding:20px;background:#f8f8f8;border-radius:12px;min-height:80px;display:flex;align-items:center;justify-content:center;color:#999;">
-  点击"生成二维码"按钮
-</div>
-</div>
-<script>
-function genQR(){
-  const text=encodeURIComponent(document.getElementById('qrInput').value.trim());
-  const size=document.getElementById('qrSize').value;
-  if(!text){alert('请输入内容');return;}
-  const url='https://api.qrserver.com/v1/create-qr-code/?size='+size+'x'+size+'&data='+text+'&format=png&qzone=2';
-  const out=document.getElementById('qrOut');
-  out.innerHTML='<img src="'+url+'" alt="QR Code" style="max-width:100%;border-radius:8px;" onload="document.getElementById('dlBtn').style.display='inline-block'" onerror="this.parentElement.innerHTML='<span style=color:#e74c3c>生成失败，请检查网络连接</span>'">';
-  window._qrUrl=url;
-}
-function downloadQR(){
-  const a=document.createElement('a');a.href=window._qrUrl;a.download='qrcode.png';a.target='_blank';a.click();
-}
-genQR();
-</script>
-            <div style="margin:24px 0;text-align:center;">
+    <main class="container tool-page">
+        <h1>QR 二维码生成器</h1>
+        <p style="color:#666;margin-bottom:20px;">输入文本或URL，实时生成二维码，支持自定义尺寸和颜色</p>
+        <div style="max-width:500px;">
+            <div style="margin-bottom:16px;">
+                <label style="font-weight:600;display:block;margin-bottom:6px;">二维码内容（文本或URL）</label>
+                <textarea id="qrText" placeholder="输入要生成二维码的内容..." style="width:100%;min-height:80px;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px;resize:vertical;">https://shg1103.github.io</textarea>
+            </div>
+            <div class="qr-controls">
+                <div><label>尺寸 <select id="qrSize"><option value="160">160x160</option><option value="200">200x200</option><option value="256" selected>256x256</option><option value="320">320x320</option><option value="400">400x400</option></select></label></div>
+                <div><label>前景色 <input type="color" id="qrFg" value="#000000"></label></div>
+                <div><label>背景色 <input type="color" id="qrBg" value="#ffffff"></label></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+                <button class="tool-btn" onclick="generateQR()">生成二维码</button>
+                <button class="tool-btn" id="dlBtn" onclick="downloadQR()" style="display:none;background:#10b981;color:#fff;">下载 PNG</button>
+            </div>
+            <div id="qrContainer" class="qr-canvas-wrap">
+                <span style="color:#999;">点击生成二维码按钮</span>
+            </div>
+        </div>
+        <div style="margin:24px 0;text-align:center;">
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
-        </div>
     </main>
-    <footer><p><a href="../sitemap.xml">站点地图</a> | DevTools - 程序员在线工具箱</p></footer>
+<script>
+var _qrCode = null;
+function generateQR() {
+    var text = document.getElementById("qrText").value.trim();
+    if (!text) { alert("请输入二维码内容"); return; }
+    var size = parseInt(document.getElementById("qrSize").value);
+    var fg = document.getElementById("qrFg").value;
+    var bg = document.getElementById("qrBg").value;
+    var container = document.getElementById("qrContainer");
+    container.innerHTML = "";
+    _qrCode = new QRCode(container, {
+        text: text,
+        width: size,
+        height: size,
+        colorDark: fg,
+        colorLight: bg,
+        correctLevel: QRCode.CorrectLevel.H
+    });
+    document.getElementById("dlBtn").style.display = "inline-block";
+}
+function downloadQR() {
+    var canvas = document.querySelector("#qrContainer canvas");
+    if (!canvas) return;
+    var link = document.createElement("a");
+    link.download = "qrcode.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+}
+</script>
 </body>
 </html>
