@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文字统计在线工具 - 中英文字数/字符数/阅读时间计算 | DevTools</title>
-    <meta name="description" content="免费文字统计在线工具，支持中英文分别统计字数、字符数（含/不含空格）、行数、段落数，自动估算阅读时间，显示UTF-8字节数。">
-    <meta name="keywords" content="字数统计,文字统计,字符统计,阅读时间,word count,中文字数,英文词数,写作工具">
+    <meta name="description" content="免费文字统计在线工具，支持中英文分别统计字数、字符数、行数、段落数，自动估算阅读时间。">
+    <meta name="keywords" content="字数统计,文字统计,字符统计,阅读时间,word count,中文字数,英文词数">
     <meta name="robots" content="index, follow">
     <meta name="author" content="DevTools">
     <link rel="canonical" href="https://shg1103.github.io/tools/text-counter.html">
-    <meta property="og:title" content="文字统计在线工具 - 中英文字数/字符数/阅读时间计算 | DevTools">
-    <meta property="og:description" content="免费文字统计在线工具，支持中英文分别统计字数、字符数、行数、段落数，自动估算阅读时间。">
+    <meta property="og:title" content="文字统计在线工具 | DevTools">
+    <meta property="og:description" content="免费文字统计在线工具，支持中英文分别统计字数、字符数、行数、段落数。">
     <meta property="og:url" content="https://shg1103.github.io/tools/text-counter.html">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:site_name" content="DevTools">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="文字统计在线工具 - 中英文字数/字符数/阅读时间计算 | DevTools">
+    <meta name="twitter:title" content="文字统计在线工具 | DevTools">
     <meta name="twitter:description" content="免费文字统计在线工具，支持中英文分别统计字数、字符数、行数、段落数。">
     <link rel="stylesheet" href="../css/style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
 <style>
 .tc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-bottom:20px;}
 .tc-card{background:#f0f2f5;border-radius:10px;padding:16px;text-align:center;}
@@ -28,52 +28,50 @@
 </style>
 </head>
 <body>
-    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
-    <main class="container tool-page">
-        <h1>文字统计工具</h1>
-        <p style="color:#666;margin-bottom:20px;">实时统计字数、字符数、行数、阅读时间</p>
-        <div style="margin-bottom:16px;">
-            <textarea id="tcInput" oninput="tcCount()" placeholder="在此输入或粘贴文本，实时统计..." style="width:100%;min-height:200px;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;resize:vertical;"></textarea>
-        </div>
-        <div class="tc-grid">
-            <div class="tc-card"><div class="num" id="tcChars">0</div><div class="lbl">字符数</div></div>
-            <div class="tc-card"><div class="num" id="tcNoSpace">0</div><div class="lbl">不含空格</div></div>
-            <div class="tc-card"><div class="num" id="tcWords" style="color:#10b981;">0</div><div class="lbl">英文词数</div></div>
-            <div class="tc-card"><div class="num" id="tcCn" style="color:#f59e0b;">0</div><div class="lbl">中文字数</div></div>
-            <div class="tc-card"><div class="num" id="tcLines" style="color:#8b5cf6;">0</div><div class="lbl">行数</div></div>
-            <div class="tc-card"><div class="num" id="tcParas" style="color:#ec4899;">0</div><div class="lbl">段落数</div></div>
-            <div class="tc-card"><div class="num" id="tcRead" style="color:#14b8a6;">0</div><div class="lbl">阅读时间</div></div>
-            <div class="tc-card"><div class="num" id="tcBytes" style="color:#6b7280;">0</div><div class="lbl">UTF-8字节</div></div>
-        </div>
-        <button class="tool-btn" onclick="document.getElementById('tcInput').value='';tcCount();" style="background:#6b7280;color:#fff;">清空</button>
-        <div style="margin:24px 0;text-align:center;">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-    </main>
+<header><div class="container"><a href="../index.html" class="logo">DevTools</a></div></header>
+<main class="container tool-page">
+<h1>文字统计工具</h1>
+<p style="color:#666;margin-bottom:20px;">实时统计字数、字符数、行数、阅读时间</p>
+<div style="margin-bottom:16px;">
+<textarea id="tcInput" oninput="tcCount()" placeholder="在此输入或粘贴文本，实时统计..." style="width:100%;min-height:200px;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;resize:vertical;"></textarea>
+</div>
+<div class="tc-grid">
+<div class="tc-card"><div class="num" id="tcChars">0</div><div class="lbl">字符数</div></div>
+<div class="tc-card"><div class="num" id="tcNoSpace">0</div><div class="lbl">不含空格</div></div>
+<div class="tc-card"><div class="num" id="tcWords" style="color:#10b981;">0</div><div class="lbl">英文词数</div></div>
+<div class="tc-card"><div class="num" id="tcCn" style="color:#f59e0b;">0</div><div class="lbl">中文字数</div></div>
+<div class="tc-card"><div class="num" id="tcLines" style="color:#8b5cf6;">0</div><div class="lbl">行数</div></div>
+<div class="tc-card"><div class="num" id="tcParas" style="color:#ec4899;">0</div><div class="lbl">段落数</div></div>
+<div class="tc-card"><div class="num" id="tcRead" style="color:#14b8a6;">0</div><div class="lbl">阅读时间</div></div>
+<div class="tc-card"><div class="num" id="tcBytes" style="color:#6b7280;">0</div><div class="lbl">UTF-8字节</div></div>
+</div>
+<button class="tool-btn" onclick="document.getElementById('tcInput').value='';tcCount();" style="background:#6b7280;color:#fff;">清空</button>
+<div style="margin:24px 0;text-align:center;">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+</main>
 <script>
 function tcCount(){
     var t=document.getElementById("tcInput").value;
     var chars=t.length;
-    var noSpace=t.replace(/[ 	
-]/g,"").length;
-    var words=t.trim()?t.trim().split(/[ 	
-]+/).length:0;
-    var cn=(t.match(/[一-鿿㐀-䶿]/g)||[]).length;
+    var noSpace=t.replace(/\s/g,"").length;
+    var words=t.trim()?t.trim().split(/\s+/).length:0;
+    var cn=(t.match(/[\u4e00-\u9fff\u3400-\u4dbf]/g)||[]).length;
     var NL=String.fromCharCode(10);
     var lines=t?t.split(NL).length:0;
-    var paras=t.trim()?t.trim().split(new RegExp(NL+"\s*"+NL)).length:0;
+    var paras=t.trim()?t.trim().split(new RegExp(NL+"\\s*"+NL)).length:0;
     var bytes=new TextEncoder().encode(t).length;
     var readSec=Math.round((cn+words*5)/300*60);
+    var show=readSec<60?readSec+"s":Math.round(readSec/60)+"min";
     document.getElementById("tcChars").textContent=chars;
     document.getElementById("tcNoSpace").textContent=noSpace;
     document.getElementById("tcWords").textContent=words;
     document.getElementById("tcCn").textContent=cn;
     document.getElementById("tcLines").textContent=lines;
     document.getElementById("tcParas").textContent=paras;
-    document.getElementById("tcRead").textContent=readSec<60?readSec+"s":Math.round(readSec/60)+"min";
+    document.getElementById("tcRead").textContent=show;
     document.getElementById("tcBytes").textContent=bytes;
-}
-</script>
+}</script>
 </body>
 </html>
