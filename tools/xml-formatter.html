@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML在线格式化校验 - XML美化压缩工具 | DevTools</title>
+    <meta name="description" content="免费在线XML格式化校验工具，支持XML美化、压缩、语法校验，纯浏览器端处理保护数据隐私，适用于API调试、配置文件整理、Web服务开发。">
+    <meta name="keywords" content="XML格式化,XML校验,XML美化,XML压缩,XML在线工具,XML formatter,XML validator,配置文件工具,XML解析">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/xml-formatter.html">
+    <meta property="og:title" content="XML在线格式化校验 - XML美化压缩工具 | DevTools">
+    <meta property="og:description" content="免费在线XML格式化校验工具，支持XML美化、压缩、语法校验，纯浏览器端处理保护数据隐私，适用于API调试、配置文件整理、Web服务开发。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/xml-formatter.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="XML在线格式化校验 - XML美化压缩工具 | DevTools">
+    <meta name="twitter:description" content="免费在线XML格式化校验工具，支持XML美化、压缩、语法校验，纯浏览器端处理保护数据隐私，适用于API调试、配置文件整理、Web服务开发。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>XML 格式化/校验</h1>
+        <p style="color:#666;margin-bottom:20px;">XML美化、压缩、语法校验</p>
+        <div class="tool-body"><div class="tool-ui">
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+        <button class="tool-btn active" onclick="setXM('format')">格式化</button>
+        <button class="tool-btn" onclick="setXM('compress')">压缩</button>
+    </div>
+    <textarea id="xmlInput" placeholder="粘贴XML数据..." style="width:100%;height:180px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;resize:vertical;"></textarea>
+    <div style="display:flex;gap:8px;margin:10px 0;flex-wrap:wrap;">
+        <button class="tool-btn" onclick="processXML()">执行</button>
+        <button class="tool-btn" onclick="document.getElementById('xmlInput').value='';document.getElementById('xmlOutput').value='';document.getElementById('xmlErr').style.display='none'">清空</button>
+        <button class="tool-btn" onclick="copyEl('xmlOutput')">复制结果</button>
+    </div>
+    <textarea id="xmlOutput" readonly placeholder="输出结果..." style="width:100%;height:180px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;background:#f9f9f9;resize:vertical;"></textarea>
+    <div id="xmlErr" style="color:#e53e3e;margin-top:8px;display:none;"></div>
+</div>
+<script>
+var _xm='format';
+function setXM(m){_xm=m;document.querySelectorAll('.tool-btn').forEach(function(b){b.classList.remove('active')});event.target.classList.add('active');}
+function processXML() {
+    var inp=document.getElementById('xmlInput').value;var out=document.getElementById('xmlOutput');var err=document.getElementById('xmlErr');err.style.display='none';
+    try{
+        var parser=new DOMParser();var xmldom=parser.parseFromString(inp,'text/xml');
+        var parseErr=xmldom.querySelector('parsererror');
+        if(parseErr){throw new Error('XML语法错误: '+parseErr.textContent);}
+        if(_xm==='compress'){var s=new XMLSerializer();out.value=s.serializeToString(xmldom.documentElement);}
+        else{var s=new XMLSerializer();var xmlStr=s.serializeToString(xmldom.documentElement);var formatted=formatXML(xmlStr);out.value=formatted;}
+    }catch(e){err.textContent='错误: '+e.message;err.style.display='block';}
+}
+function formatXML(xml) {
+    var formatted='';var indent='';var parts=xml.split(/>\s*</);
+    for(var i=0;i<parts.length;i++){
+        var p=parts[i];
+        if(p.match(/^\/\w/))indent=indent.substring(2);
+        formatted+=indent+'<'+(i>0?'\n':'')+p+(i<parts.length-1?'>':'');
+        if(p.match(/^<?\/[^>]*>$/)){}
+        else if(p.match(/[^\/]>$/))indent+='  ';
+    }
+    return formatted;
+}
+function copyEl(id){var v=document.getElementById(id).value;if(!v)return;navigator.clipboard.writeText(v).then(function(){alert('已复制!');});}
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
