@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG在线编辑预览 - SVG代码实时渲染 | DevTools</title>
+    <meta name="description" content="免费在线SVG编辑预览工具，编辑SVG代码实时查看渲染效果，支持一键复制SVG代码、下载为SVG文件，适用于图标设计、SVG图形调优、前端开发调试。">
+    <meta name="keywords" content="SVG编辑,SVG预览,SVG在线编辑,SVG代码,SVG渲染,图标编辑,矢量图形,SVG工具,SVG代码编辑,图片优化">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/svg-editor.html">
+    <meta property="og:title" content="SVG在线编辑预览 - SVG代码实时渲染 | DevTools">
+    <meta property="og:description" content="免费在线SVG编辑预览工具，编辑SVG代码实时查看渲染效果，支持一键复制SVG代码、下载为SVG文件，适用于图标设计、SVG图形调优、前端开发调试。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/svg-editor.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SVG在线编辑预览 - SVG代码实时渲染 | DevTools">
+    <meta name="twitter:description" content="免费在线SVG编辑预览工具，编辑SVG代码实时查看渲染效果，支持一键复制SVG代码、下载为SVG文件，适用于图标设计、SVG图形调优、前端开发调试。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>SVG 编辑预览</h1>
+        <p style="color:#666;margin-bottom:20px;">SVG代码编辑，实时预览渲染效果</p>
+        <div class="tool-body"><div class="tool-ui">
+    <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+        <button class="tool-btn" onclick="renderSVG()">渲染</button>
+        <button class="tool-btn" onclick="loadSVGSample()">加载示例</button>
+        <button class="tool-btn" onclick="copyEl('svgCode')">复制代码</button>
+        <button class="tool-btn" onclick="downloadSVG()">下载 SVG</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <textarea id="svgCode" oninput="autoSVG()" style="width:100%;height:350px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:12px;resize:vertical;background:#f8f8f8;"></textarea>
+        <div id="svgPreview" style="width:100%;height:350px;border:1px solid #ddd;border-radius:6px;display:flex;align-items:center;justify-content:center;background:#fafafa;overflow:hidden;"></div>
+    </div>
+</div>
+<script>
+var _svgTimer=null;
+function renderSVG(){
+    var code=document.getElementById('svgCode').value;var prev=document.getElementById('svgPreview');
+    if(code.trim().startsWith('<svg')){prev.innerHTML=code;}
+    else{prev.innerHTML='<div style="color:#c00;">错误: 代码必须以 &lt;svg&gt; 开头</div>';}
+}
+function autoSVG(){clearTimeout(_svgTimer);_svgTimer=setTimeout(renderSVG,500);}
+function loadSVGSample(){
+    document.getElementById('svgCode').value='<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">\n  <defs>\n    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">\n      <stop offset="0%" stop-color="#667eea"/>\n      <stop offset="100%" stop-color="#764ba2"/>\n    </linearGradient>\n  </defs>\n  <circle cx="100" cy="100" r="80" fill="url(#g)"/>\n  <text x="100" y="110" text-anchor="middle" fill="white" font-size="24" font-weight="bold">SVG</text>\n</svg>';
+    renderSVG();
+}
+function downloadSVG(){
+    var code=document.getElementById('svgCode').value;if(!code)return;
+    var blob=new Blob([code],{type:'image/svg+xml'});var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');a.href=url;a.download='image.svg';a.click();URL.revokeObjectURL(url);
+}
+function copyEl(id){var v=document.getElementById(id).value;if(!v)return;navigator.clipboard.writeText(v).then(function(){alert('已复制!');});}
+loadSVGSample();
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
