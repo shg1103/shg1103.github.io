@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML转Markdown在线工具 - 网页转Markdown | DevTools</title>
+    <meta name="description" content="免费在线HTML转Markdown工具，粘贴HTML代码一键转换为Markdown格式，支持标题/列表/表格/链接/图片等HTML标签转换，适用于内容迁移、博客写作、文档转换。">
+    <meta name="keywords" content="HTML转Markdown,HTML2Markdown,网页转Markdown,HTML转换,turndown,内容转换,博客迁移,Markdown工具,HTML to Markdown">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/html-to-markdown.html">
+    <meta property="og:title" content="HTML转Markdown在线工具 - 网页转Markdown | DevTools">
+    <meta property="og:description" content="免费在线HTML转Markdown工具，粘贴HTML代码一键转换为Markdown格式，支持标题/列表/表格/链接/图片等HTML标签转换，适用于内容迁移、博客写作、文档转换。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/html-to-markdown.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HTML转Markdown在线工具 - 网页转Markdown | DevTools">
+    <meta name="twitter:description" content="免费在线HTML转Markdown工具，粘贴HTML代码一键转换为Markdown格式，支持标题/列表/表格/链接/图片等HTML标签转换，适用于内容迁移、博客写作、文档转换。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>HTML 转 Markdown</h1>
+        <p style="color:#666;margin-bottom:20px;">HTML代码一键转为Markdown格式</p>
+        <div class="tool-body"><div class="tool-ui">
+    <textarea id="htmInput" placeholder="粘贴HTML代码..." style="width:100%;height:180px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;resize:vertical;"></textarea>
+    <div style="display:flex;gap:8px;margin:10px 0;flex-wrap:wrap;">
+        <button class="tool-btn" onclick="convertHtml()">转换</button>
+        <button class="tool-btn" onclick="document.getElementById('htmInput').value='<h1>示例标题</h1><p>这是一个<strong>测试</strong>段落</p>'">加载示例</button>
+        <button class="tool-btn" onclick="copyEl('htmOutput')">复制结果</button>
+    </div>
+    <textarea id="htmOutput" readonly placeholder="Markdown输出..." style="width:100%;height:180px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;background:#f9f9f9;resize:vertical;"></textarea>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/turndown@7.2.0/dist/turndown.js"></script>
+<script>
+function convertHtml(){
+    var inp=document.getElementById('htmInput').value;var out=document.getElementById('htmOutput');
+    if(!inp){out.value='';return;}
+    try{var turndownService=new TurndownService({headingStyle:'atx',codeBlockStyle:'fenced'});out.value=turndownService.turndown(inp);}
+    catch(e){out.value='转换失败: '+e.message;}
+}
+function copyEl(id){var v=document.getElementById(id).value;if(!v)return;navigator.clipboard.writeText(v).then(function(){alert('已复制!');});}
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
