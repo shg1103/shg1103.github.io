@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符编码检测工具 - Unicode码点分析器 | DevTools</title>
+    <meta name="description" content="免费在线字符编码检测工具，逐字符分析Unicode码点(U+)、UTF-8十六进制、类别、所属区块等信息，识别不可见字符、零宽字符、异体字选择器，适用于编码调试、CSS content生成、Unicode研究。">
+    <meta name="keywords" content="字符编码检测,Unicode分析,UTF-8检测,字符码点,字符编码工具,Unicode码点,零宽字符检测,不可见字符,字符分析,编码调试">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/char-encoding.html">
+    <meta property="og:title" content="字符编码检测工具 - Unicode码点分析器 | DevTools">
+    <meta property="og:description" content="免费在线字符编码检测工具，逐字符分析Unicode码点(U+)、UTF-8十六进制、类别、所属区块等信息，识别不可见字符、零宽字符、异体字选择器，适用于编码调试、CSS content生成、Unicode研究。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/char-encoding.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="字符编码检测工具 - Unicode码点分析器 | DevTools">
+    <meta name="twitter:description" content="免费在线字符编码检测工具，逐字符分析Unicode码点(U+)、UTF-8十六进制、类别、所属区块等信息，识别不可见字符、零宽字符、异体字选择器，适用于编码调试、CSS content生成、Unicode研究。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>字符编码检测</h1>
+        <p style="color:#666;margin-bottom:20px;">逐字符分析Unicode码点、UTF-8编码、字符类别</p>
+        <div class="tool-body"><div class="tool-ui">
+    <textarea id="ceInput" oninput="analyzeChars()" placeholder="粘贴要分析的文本..." style="width:100%;height:100px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:14px;resize:vertical;"></textarea>
+    <div id="ceResult" style="margin-top:12px;"></div>
+    <div style="font-size:11px;color:#888;margin-top:8px;" id="ceStats"></div>
+</div>
+<script>
+function analyzeChars(){
+    var inp=document.getElementById('ceInput').value;var r=document.getElementById('ceResult');
+    if(!inp){r.innerHTML='<div style="color:#999;text-align:center;padding:20px;">输入文本后自动分析</div>';document.getElementById('ceStats').textContent='';return;}
+    var html='<table style="width:100%;border-collapse:collapse;font-size:12px;"><tr style="background:#f0f4ff;"><th style="padding:6px 8px;border:1px solid #ddd;">字符</th><th style="padding:6px 8px;border:1px solid #ddd;">Unicode</th><th style="padding:6px 8px;border:1px solid #ddd;">UTF-8(hex)</th><th style="padding:6px 8px;border:1px solid #ddd;">十进制</th><th style="padding:6px 8px;border:1px solid #ddd;">类别</th></tr>';
+    var chars=[...inp];for(var i=0;i<Math.min(chars.length,200);i++){
+        var c=chars[i];var cp=c.codePointAt(0);var uni='U+'+cp.toString(16).toUpperCase().padStart(4,'0');
+        var utf8=new TextEncoder().encode(c);var hex=Array.from(utf8).map(function(b){return b.toString(16).padStart(2,'0');}).join(' ');
+        var cat='';if(cp>=0x4E00&&cp<=0x9FFF)cat='CJK统一汉字';else if(cp>=0x20&&cp<=0x7E)cat='ASCII可打印';else if(cp<0x20||cp===0x7F)cat='控制字符';else if(cp>=0x3000&&cp<=0x303F)cat='CJK符号标点';else if(cp>=0xFF00&&cp<=0xFFEF)cat='全角字符';else cat='其他Unicode';
+        if(cp===0x200B)cat='零宽空格';if(cp===0x200C)cat='零宽非连接符';if(cp===0x200D)cat='零宽连接符';if(cp===0xFEFF)cat='BOM';
+        var disp=c;if(cp<0x20||cp===0x7F)disp='<span style="background:#ffe0e0;padding:0 4px;border-radius:2px;">0x'+cp.toString(16).padStart(2,'0')+'</span>';
+        html+='<tr><td style="padding:4px 8px;border:1px solid #ddd;font-size:18px;text-align:center;">'+disp+'</td><td style="padding:4px 8px;border:1px solid #ddd;font-family:monospace;">'+uni+'</td><td style="padding:4px 8px;border:1px solid #ddd;font-family:monospace;">'+hex+'</td><td style="padding:4px 8px;border:1px solid #ddd;font-family:monospace;">'+cp+'</td><td style="padding:4px 8px;border:1px solid #ddd;font-size:11px;">'+cat+'</td></tr>';
+    }
+    html+='</table>';
+    if(chars.length>200)html+='<div style="padding:8px;text-align:center;color:#888;font-size:12px;">...仅显示前200个字符（共'+chars.length+'个）</div>';
+    r.innerHTML=html;
+    var bytes=new TextEncoder().encode(inp).length;
+    document.getElementById('ceStats').textContent='共 '+chars.length+' 个字符 | UTF-8: '+bytes+' 字节 | 总码点: '+[...inp].reduce(function(s,c){return s+1;},0);
+}
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
