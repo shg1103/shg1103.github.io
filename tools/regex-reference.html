@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式速查手册 - 常用正则大全 | DevTools</title>
+    <meta name="description" content="免费在线正则表达式速查手册，分类展示常用正则表达式，支持一键复制、实时测试、手机号/邮箱/IP/URL等常见匹配模式大全，适用于开发参考、日常编码。">
+    <meta name="keywords" content="正则表达式,正则速查,常用正则,正则手册,正则大全,regex cheat sheet,正则表达式参考,正则匹配模式,手机号正则,邮箱正则">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/regex-reference.html">
+    <meta property="og:title" content="正则表达式速查手册 - 常用正则大全 | DevTools">
+    <meta property="og:description" content="免费在线正则表达式速查手册，分类展示常用正则表达式，支持一键复制、实时测试、手机号/邮箱/IP/URL等常见匹配模式大全，适用于开发参考、日常编码。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/regex-reference.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="正则表达式速查手册 - 常用正则大全 | DevTools">
+    <meta name="twitter:description" content="免费在线正则表达式速查手册，分类展示常用正则表达式，支持一键复制、实时测试、手机号/邮箱/IP/URL等常见匹配模式大全，适用于开发参考、日常编码。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>正则表达式速查手册</h1>
+        <p style="color:#666;margin-bottom:20px;">常用正则大全，分类浏览一键复制</p>
+        <div class="tool-body"><div class="tool-ui">
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+        <button class="tool-btn active" onclick="showRG('common')">常用验证</button>
+        <button class="tool-btn" onclick="showRG('text')">文本处理</button>
+        <button class="tool-btn" onclick="showRG('number')">数字</button>
+        <button class="tool-btn" onclick="showRG('web')">Web相关</button>
+        <button class="tool-btn" onclick="showRG('all')">全部</button>
+    </div>
+    <div id="rgList" style="font-size:13px;"></div>
+</div>
+<script>
+var RG_DATA={
+    'common':[
+        ['手机号(中国)','^1[3-9]\\d{9}$','匹配11位中国手机号'],
+        ['邮箱','^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$','标准邮箱格式'],
+        ['身份证(中国)','^[1-9]\\d{5}(18|19|20)\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])\\d{3}[\\dXx]$','18位身份证号'],
+        ['IP v4','^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$','IPv4地址'],
+        ['URL','^https?://[\\w-]+(\\.[\\w-]+)+[/#?]?.*$','HTTP/HTTPS URL'],
+        ['日期(YYYY-MM-DD)','^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$','日期格式'],
+    ],
+    'text':[
+        ['中文字符','[\\u4e00-\\u9fa5]','匹配任意中文字符'],
+        ['中文标点','[\\u3000-\\u303f\\uff00-\\uffef]','匹配中文标点符号'],
+        ['空白行','^\\s*$','匹配空行或空格行'],
+        ['首尾空白','^\\s+|\\s+$','匹配开头或结尾空白字符'],
+        ['HTML标签','<[^>]+>','匹配HTML标签'],
+        ['QQ号','^[1-9][0-9]{4,10}$','5-11位QQ号码'],
+    ],
+    'number':[
+        ['正整数','^[1-9]\\d*$','大于0的整数'],
+        ['负整数','^-[1-9]\\d*$','小于0的整数'],
+        ['整数','^-?\\d+$','任意整数(含0)'],
+        ['浮点数','^-?\\d+\\.\\d+$','小数格式'],
+        ['金额(2位小数)','^\\d+\\.\\d{2}$','精确到分的金额'],
+        ['16进制颜色','^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$','HEX颜色值'],
+    ],
+    'web':[
+        ['域名','^([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}$','域名格式'],
+        ['端口号','^([0-9]|[1-9]\\d|[1-9]\\d{2}|[1-9]\\d{3}|[1-5]\\d{4}|6[0-4]\\d{3}|65[0-4]\\d{2}|655[0-2]\\d|6553[0-5])$','0-65535'],
+        ['Base64','^[A-Za-z0-9+/=]+$','Base64编码字符串'],
+        ['UUID','^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$','UUID v4格式'],
+        ['时间( HH:mm:ss )','^([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$','24小时时间格式'],
+        ['邮政编码(中国)','^[1-9]\\d{5}$','6位邮政编码'],
+    ]
+};
+function showRG(cat){
+    document.querySelectorAll('.tool-btn').forEach(function(b){b.classList.remove('active');});event.target.classList.add('active');
+    var list=document.getElementById('rgList');var html='<table style="width:100%;border-collapse:collapse;font-size:13px;">';
+    if(cat==='all'){var keys=Object.keys(RG_DATA);keys.forEach(function(k){RG_DATA[k].forEach(function(r){html+=rgRow(r);});});}
+    else{RG_DATA[cat].forEach(function(r){html+=rgRow(r);});}
+    html+='</table>';list.innerHTML=html;
+}
+function rgRow(r){return '<tr><td style="padding:6px 8px;border:1px solid #ddd;white-space:nowrap;font-size:12px;">'+r[0]+'</td><td style="padding:6px 8px;border:1px solid #ddd;font-family:monospace;font-size:11px;cursor:pointer;" onclick="copyT(\''+r[1].replace(/\'/g,'\"')+'\')" title="点击复制">'+r[1]+'</td><td style="padding:6px 8px;border:1px solid #ddd;font-size:11px;color:#888;">'+r[2]+'</td></tr>';}
+function copyT(t){navigator.clipboard.writeText(t).then(function(){alert('已复制: '+t);});}
+showRG('common');
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
