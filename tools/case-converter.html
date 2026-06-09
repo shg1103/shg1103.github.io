@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大小写转换器 - 驼峰/蛇形/帕斯卡命名互转 | DevTools</title>
+    <meta name="description" content="免费在线大小写转换工具，支持驼峰(camelCase)、帕斯卡(PascalCase)、蛇形(snake_case)、烤肉串(kebab-case)、大写、小写、首字母大写等多种格式互转，适用于代码命名、文本格式化。">
+    <meta name="keywords" content="大小写转换,驼峰命名,蛇形命名,帕斯卡命名,camelCase,snake_case,PascalCase,kebab-case,命名转换,代码命名工具">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/case-converter.html">
+    <meta property="og:title" content="大小写转换器 - 驼峰/蛇形/帕斯卡命名互转 | DevTools">
+    <meta property="og:description" content="免费在线大小写转换工具，支持驼峰(camelCase)、帕斯卡(PascalCase)、蛇形(snake_case)、烤肉串(kebab-case)、大写、小写、首字母大写等多种格式互转，适用于代码命名、文本格式化。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/case-converter.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="大小写转换器 - 驼峰/蛇形/帕斯卡命名互转 | DevTools">
+    <meta name="twitter:description" content="免费在线大小写转换工具，支持驼峰(camelCase)、帕斯卡(PascalCase)、蛇形(snake_case)、烤肉串(kebab-case)、大写、小写、首字母大写等多种格式互转，适用于代码命名、文本格式化。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>大小写转换器</h1>
+        <p style="color:#666;margin-bottom:20px;">camelCase/snake_case/PascalCase/kebab-case互转</p>
+        <div class="tool-body"><div class="tool-ui">
+    <textarea id="ccInput" placeholder="输入要转换的文本..." style="width:100%;height:100px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;resize:vertical;"></textarea>
+    <div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap;">
+        <button class="tool-btn" onclick="conv('camel')">camelCase</button>
+        <button class="tool-btn" onclick="conv('pascal')">PascalCase</button>
+        <button class="tool-btn" onclick="conv('snake')">snake_case</button>
+        <button class="tool-btn" onclick="conv('kebab')">kebab-case</button>
+        <button class="tool-btn" onclick="conv('upper')">全大写</button>
+        <button class="tool-btn" onclick="conv('lower')">全小写</button>
+        <button class="tool-btn" onclick="conv('title')">首字母大写</button>
+    </div>
+    <textarea id="ccOutput" readonly placeholder="输出结果..." style="width:100%;height:180px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;background:#f9f9f9;resize:vertical;"></textarea>
+    <div style="margin-top:8px;"><button class="tool-btn" onclick="copyEl('ccOutput')">复制结果</button></div>
+</div>
+<script>
+function conv(mode){
+    var inp=document.getElementById('ccInput').value;var out=document.getElementById('ccOutput');
+    if(!inp){out.value='';return;}
+    var words=inp.match(/[A-Z]?[a-z]+|[0-9]+|[A-Z]+(?=[A-Z]|$)/g)||inp.split(/[^a-zA-Z0-9]+/).filter(Boolean);
+    if(mode==='camel') out.value=words.map(function(w,i){return i===0?w.toLowerCase():w.charAt(0).toUpperCase()+w.slice(1).toLowerCase();}).join('');
+    else if(mode==='pascal') out.value=words.map(function(w){return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase();}).join('');
+    else if(mode==='snake') out.value=words.map(function(w){return w.toLowerCase();}).join('_');
+    else if(mode==='kebab') out.value=words.map(function(w){return w.toLowerCase();}).join('-');
+    else if(mode==='upper') out.value=inp.toUpperCase();
+    else if(mode==='lower') out.value=inp.toLowerCase();
+    else if(mode==='title') out.value=inp.replace(/\b\w/g,function(c){return c.toUpperCase();});
+}
+function copyEl(id){var v=document.getElementById(id).value;if(!v)return;navigator.clipboard.writeText(v).then(function(){alert('已复制!');});}
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
