@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML在线实时预览 - HTML/CSS/JS代码渲染 | DevTools</title>
+    <meta name="description" content="免费在线HTML实时预览编辑工具，左侧编写HTML/CSS/JS代码，右侧实时渲染预览效果，支持iframe隔离安全预览，适用于前端原型设计、代码片段测试、学习调试。">
+    <meta name="keywords" content="HTML预览,实时预览,HTML在线编辑器,HTML渲染,前端预览,HTML/CSS/JS预览,代码实时渲染,在线HTML编辑器,网页预览,前端调试工具">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/html-preview.html">
+    <meta property="og:title" content="HTML在线实时预览 - HTML/CSS/JS代码渲染 | DevTools">
+    <meta property="og:description" content="免费在线HTML实时预览编辑工具，左侧编写HTML/CSS/JS代码，右侧实时渲染预览效果，支持iframe隔离安全预览，适用于前端原型设计、代码片段测试、学习调试。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/html-preview.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HTML在线实时预览 - HTML/CSS/JS代码渲染 | DevTools">
+    <meta name="twitter:description" content="免费在线HTML实时预览编辑工具，左侧编写HTML/CSS/JS代码，右侧实时渲染预览效果，支持iframe隔离安全预览，适用于前端原型设计、代码片段测试、学习调试。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>HTML 实时预览</h1>
+        <p style="color:#666;margin-bottom:20px;">HTML/CSS/JS代码编辑，右侧实时渲染</p>
+        <div class="tool-body"><div class="tool-ui">
+    <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+        <button class="tool-btn" onclick="renderHTML()">渲染</button>
+        <button class="tool-btn" onclick="loadHTMLSample()">加载示例</button>
+        <button class="tool-btn" onclick="copyEl('hpCode')">复制代码</button>
+        <label style="margin-left:auto;font-size:12px;color:#888;display:flex;align-items:center;">
+            <input type="checkbox" id="hpAuto" checked onchange="if(this.checked)enableAuto()"> 自动渲染
+        </label>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <textarea id="hpCode" oninput="autoRender()" placeholder="&lt;h1&gt;Hello World&lt;/h1&gt;&#10;&lt;p&gt;在左侧编辑代码&lt;/p&gt;" style="width:100%;height:350px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:12px;resize:vertical;background:#1e1e1e;color:#d4d4d4;"></textarea>
+        <iframe id="hpPreview" style="width:100%;height:350px;border:1px solid #ddd;border-radius:6px;background:#fff;"></iframe>
+    </div>
+</div>
+<script>
+var _hpTimer=null;
+function renderHTML(){
+    var code=document.getElementById('hpCode').value;
+    var iframe=document.getElementById('hpPreview');
+    iframe.src='data:text/html;charset=utf-8,'+encodeURIComponent('<!DOCTYPE html><html><head><style>body{font-family:sans-serif;padding:20px;}</style></head><body>'+code+'</body></html>');
+}
+function autoRender(){if(!document.getElementById('hpAuto').checked)return;clearTimeout(_hpTimer);_hpTimer=setTimeout(renderHTML,500);}
+function loadHTMLSample(){
+    document.getElementById('hpCode').value='<h1 style="color:#6366f1;">Hello DevTools!</h1>\n<p>这是一个 <strong>HTML 实时预览</strong> 工具。</p>\n<ul>\n  <li>左侧编辑HTML代码</li>\n  <li>右侧实时查看效果</li>\n  <li>支持任意HTML/CSS</li>\n</ul>\n<hr>\n<button style="padding:8px 16px;background:#6366f1;color:white;border:none;border-radius:6px;cursor:pointer;" onclick="alert(\'按钮点击成功!\')">点我试试</button>';
+    renderHTML();
+}
+function copyEl(id){var v=document.getElementById(id).value;if(!v)return;navigator.clipboard.writeText(v).then(function(){alert('已复制!');});}
+renderHTML();
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
