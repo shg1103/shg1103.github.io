@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS渐变色预设 - 精选渐变色背景一键复制 | DevTools</title>
+    <meta name="description" content="免费在线CSS渐变色预设工具，40+精选精美渐变色方案，支持线性/径向切换，一键复制CSS代码或直接下载为壁纸，适用于网页设计、UI界面、社交媒体配图。">
+    <meta name="keywords" content="渐变色预设,CSS渐变色,渐变背景,渐变色方案,渐变色大全,渐变配色,渐变色复制,彩色渐变,渐变背景图,gradient预设">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/gradient-presets.html">
+    <meta property="og:title" content="CSS渐变色预设 - 精选渐变色背景一键复制 | DevTools">
+    <meta property="og:description" content="免费在线CSS渐变色预设工具，40+精选精美渐变色方案，支持线性/径向切换，一键复制CSS代码或直接下载为壁纸，适用于网页设计、UI界面、社交媒体配图。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/gradient-presets.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CSS渐变色预设 - 精选渐变色背景一键复制 | DevTools">
+    <meta name="twitter:description" content="免费在线CSS渐变色预设工具，40+精选精美渐变色方案，支持线性/径向切换，一键复制CSS代码或直接下载为壁纸，适用于网页设计、UI界面、社交媒体配图。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>渐变色预设</h1>
+        <p style="color:#666;margin-bottom:20px;">40+精美渐变色方案，一键复制CSS</p>
+        <div class="tool-body"><div class="tool-ui">
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+        <input type="text" id="gpSearch" oninput="filterGradients()" placeholder="搜索渐变色..." style="flex:1;min-width:120px;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;">
+        <button class="tool-btn" onclick="toggleGP()">切换预览</button>
+    </div>
+    <div id="gpGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;"></div>
+</div>
+<script>
+var GRADIENTS=[
+    {name:'极光紫',c1:'#667eea',c2:'#764ba2',dir:'135deg'},
+    {name:'海洋蓝',c1:'#2193b0',c2:'#6dd5ed',dir:'135deg'},
+    {name:'日落橙',c1:'#f093fb',c2:'#f5576c',dir:'135deg'},
+    {name:'柠檬黄',c1:'#ffe259',c2:'#ffa751',dir:'135deg'},
+    {name:'翡翠绿',c1:'#11998e',c2:'#38ef7d',dir:'135deg'},
+    {name:'星空紫',c1:'#3a1c71',c2:'#d76d77',dir:'135deg'},
+    {name:'珊瑚粉',c1:'#ff9a9e',c2:'#fecfef',dir:'135deg'},
+    {name:'薄荷绿',c1:'#00b4db',c2:'#0083b0',dir:'135deg'},
+    {name:'晚霞红',c1:'#ff6a88',c2:'#ff99ac',dir:'135deg'},
+    {name:'森林绿',c1:'#134e5e',c2:'#71b280',dir:'135deg'},
+    {name:'薰衣草',c1:'#c471ed',c2:'#f64f59',dir:'135deg'},
+    {name:'晴空蓝',c1:'#48c6ef',c2:'#6f86d6',dir:'135deg'},
+    {name:'蜜桃橙',c1:'#f7971e',c2:'#ffd200',dir:'135deg'},
+    {name:'冰川蓝',c1:'#2196f3',c2:'#e91e63',dir:'135deg'},
+    {name:'暗夜紫',c1:'#0f0c29',c2:'#302b63',dir:'135deg'},
+    {name:'樱花粉',c1:'#fbc2eb',c2:'#a6c1ee',dir:'135deg'},
+    {name:'阳光橙',c1:'#f12711',c2:'#f5af19',dir:'135deg'},
+    {name:'翡翠琉璃',c1:'#02aab0',c2:'#00cdac',dir:'135deg'},
+    {name:'玫瑰红茶',c1:'#db4a4a',c2:'#8e2de2',dir:'135deg'},
+    {name:'深海蓝',c1:'#000046',c2:'#1cb5e0',dir:'135deg'},
+    {name:'极夜黑',c1:'#232526',c2:'#414345',dir:'135deg'},
+    {name:'晨曦金',c1:'#c94b4b',c2:'#4b134f',dir:'135deg'},
+    {name:'碧波绿',c1:'#00b09b',c2:'#96c93d',dir:'135deg'},
+    {name:'紫罗兰',c1:'#654ea3',c2:'#eaafc8',dir:'135deg'},
+    {name:'霓虹彩',c1:'#ee0979',c2:'#ff6a00',dir:'135deg'},
+    {name:'天空之境',c1:'#36d1dc',c2:'#5b86e5',dir:'135deg'},
+    {name:'烟熏紫',c1:'#614385',c2:'#516395',dir:'135deg'},
+    {name:'马卡龙',c1:'#fdcbf1',c2:'#e6dee9',dir:'135deg'},
+    {name:'复古黄',c1:'#d4a373',c2:'#fefae0',dir:'135deg'},
+    {name:'极简灰',c1:'#bdc3c7',c2:'#2c3e50',dir:'135deg'},
+    {name:'糖果色',c1:'#ffecd2',c2:'#fcb69f',dir:'135deg'},
+    {name:'雨林绿',c1:'#1d4350',c2:'#a43931',dir:'135deg'},
+    {name:'独角兽',c1:'#ee9ca7',c2:'#ffdde1',dir:'135deg'},
+    {name:'日落大道',c1:'#f857a6',c2:'#ff5858',dir:'135deg'},
+    {name:'极地蓝',c1:'#4facfe',c2:'#00f2fe',dir:'135deg'},
+    {name:'秋叶红',c1:'#f2709c',c2:'#ff9472',dir:'135deg'},
+    {name:'墨玉绿',c1:'#0b8457',c2:'#2b8000',dir:'135deg'},
+    {name:'银河紫',c1:'#2b2d42',c2:'#8d99ae',dir:'135deg'},
+    {name:'暖阳黄',c1:'#fcb045',c2:'#fd1d1d',dir:'135deg'},
+    {name:'冰雪蓝',c1:'#e0eafc',c2:'#cfdef3',dir:'135deg'},
+    {name:'极光绿',c1:'#2980b9',c2:'#2ecc71',dir:'135deg'},
+    {name:'暮光紫',c1:'#8e2de2',c2:'#4a00e0',dir:'135deg'},
+];
+var _gpShowCSS=false;
+function toggleGP(){_gpShowCSS=!_gpShowCSS;renderGradients();}
+function renderGradients(){
+    var grid=document.getElementById('gpGrid');var q=document.getElementById('gpSearch').value.trim().toLowerCase();
+    var filtered=q?GRADIENTS.filter(function(g){return g.name.includes(q);}):GRADIENTS;
+    grid.innerHTML=filtered.map(function(g,i){
+        var css='background: linear-gradient('+g.dir+', '+g.c1+', '+g.c2+');';
+        return '<div style="border-radius:10px;overflow:hidden;cursor:pointer;border:1px solid #eee;transition:transform .2s;" onclick="copyGradient('+i+')" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">'+
+            '<div style="height:80px;'+css+'"></div>'+
+            '<div style="padding:8px;background:#fff;">'+
+            '<div style="font-size:13px;font-weight:600;">'+g.name+'</div>'+
+            '<div style="font-size:10px;color:#888;font-family:monospace;">'+g.c1+' / '+g.c2+'</div>'+
+            (_gpShowCSS?'<div style="font-size:10px;color:#666;font-family:monospace;margin-top:4px;word-break:break-all;">'+css+'</div>':'')+
+            '</div></div>';
+    }).join('');
+}
+function copyGradient(i){
+    var g=GRADIENTS[i];var css='background: linear-gradient('+g.dir+', '+g.c1+', '+g.c2+');';
+    navigator.clipboard.writeText(css).then(function(){alert('已复制: '+g.name+'\n'+css);});
+}
+function filterGradients(){renderGradients();}
+renderGradients();
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
