@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API密钥生成器 - 在线生成安全随机密钥 | DevTools</title>
+    <meta name="description" content="免费在线API密钥生成器，支持Hex/Base64/随机字符/自定义格式密钥生成，可调位数和字符集，真随机数生成(crypto.getRandomValues)，适用于API认证密钥、Session密钥、加密密钥。">
+    <meta name="keywords" content="API密钥生成,API Key,密钥生成,随机密钥,Token生成,密钥生成器,安全密钥,API密钥,secret key,加密密钥">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/api-key-generator.html">
+    <meta property="og:title" content="API密钥生成器 - 在线生成安全随机密钥 | DevTools">
+    <meta property="og:description" content="免费在线API密钥生成器，支持Hex/Base64/随机字符/自定义格式密钥生成，可调位数和字符集，真随机数生成(crypto.getRandomValues)，适用于API认证密钥、Session密钥、加密密钥。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/api-key-generator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="API密钥生成器 - 在线生成安全随机密钥 | DevTools">
+    <meta name="twitter:description" content="免费在线API密钥生成器，支持Hex/Base64/随机字符/自定义格式密钥生成，可调位数和字符集，真随机数生成(crypto.getRandomValues)，适用于API认证密钥、Session密钥、加密密钥。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>API 密钥生成器</h1>
+        <p style="color:#666;margin-bottom:20px;">Hex/Base64/自定义格式安全密钥批量生成</p>
+        <div class="tool-body"><div class="tool-ui">
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+        <label>格式: <select id="akFormat" style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;">
+            <option value="hex">Hex (十六进制)</option>
+            <option value="base64">Base64 (URL安全)</option>
+            <option value="alphanum">字母数字混合</option>
+            <option value="custom">纯大写+数字</option>
+        </select></label>
+        <label>位数: <input type="number" id="akLen" value="32" min="8" max="256" style="width:60px;padding:4px 8px;border:1px solid #ddd;border-radius:4px;"></label>
+        <label>数量: <input type="number" id="akCount" value="3" min="1" max="20" style="width:60px;padding:4px 8px;border:1px solid #ddd;border-radius:4px;"></label>
+        <button class="tool-btn" onclick="genKeys()">生成</button>
+        <button class="tool-btn" onclick="copyEl('akOutput')">复制全部</button>
+    </div>
+    <textarea id="akOutput" readonly style="width:100%;height:250px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:12px;background:#f9f9f9;resize:vertical;"></textarea>
+    <div style="font-size:11px;color:#888;margin-top:4px;text-align:right;" id="akInfo"></div>
+</div>
+<script>
+function genKeys(){
+    var fmt=document.getElementById('akFormat').value;var len=parseInt(document.getElementById('akLen').value)||32;var cnt=parseInt(document.getElementById('akCount').value)||3;
+    var pool='';if(fmt==='hex')pool='0123456789abcdef';else if(fmt==='base64')pool='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';else if(fmt==='alphanum')pool='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';else pool='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var lines=[];
+    for(var k=0;k<cnt;k++){
+        var key='';
+        var arr=new Uint8Array(len);crypto.getRandomValues(arr);
+        for(var i=0;i<len;i++)key+=pool[arr[i]%pool.length];
+        // Add prefix formatting
+        if(fmt==='hex'||fmt==='base64'){for(var i=8;i<key.length;i+=9)key=key.slice(0,i)+'-'+key.slice(i);}
+        lines.push(key);
+    }
+    document.getElementById('akOutput').value=lines.join('\n');
+    document.getElementById('akInfo').textContent='生成了 '+cnt+' 个密钥, 每个 '+len+' 位 ('+fmt+')';
+}
+function copyEl(id){var v=document.getElementById(id).value;if(!v)return;navigator.clipboard.writeText(v).then(function(){alert('已复制!');});}
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
