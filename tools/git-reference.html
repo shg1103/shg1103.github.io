@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git命令速查手册 - 常用Git命令参考 | DevTools</title>
+    <meta name="description" content="免费在线Git命令速查手册，分类整理Git常用命令含使用示例，覆盖仓库管理/分支操作/提交修改/远程同步/撤销回滚/合并冲突等场景，适用于Git初学者参考、日常开发速查。">
+    <meta name="keywords" content="Git命令,Git速查,Git参考,Git常用命令,Git教程,Git cheat sheet,Git操作,Git命令大全,版本控制,代码管理">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/git-reference.html">
+    <meta property="og:title" content="Git命令速查手册 - 常用Git命令参考 | DevTools">
+    <meta property="og:description" content="免费在线Git命令速查手册，分类整理Git常用命令含使用示例，覆盖仓库管理/分支操作/提交修改/远程同步/撤销回滚/合并冲突等场景，适用于Git初学者参考、日常开发速查。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/git-reference.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Git命令速查手册 - 常用Git命令参考 | DevTools">
+    <meta name="twitter:description" content="免费在线Git命令速查手册，分类整理Git常用命令含使用示例，覆盖仓库管理/分支操作/提交修改/远程同步/撤销回滚/合并冲突等场景，适用于Git初学者参考、日常开发速查。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>Git 命令速查手册</h1>
+        <p style="color:#666;margin-bottom:20px;">Git常用命令分类参考，含使用示例</p>
+        <div class="tool-body"><div class="tool-ui">
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+        <button class="tool-btn active" onclick="showGit('start')">开始</button>
+        <button class="tool-btn" onclick="showGit('branch')">分支</button>
+        <button class="tool-btn" onclick="showGit('commit')">提交</button>
+        <button class="tool-btn" onclick="showGit('remote')">远程</button>
+        <button class="tool-btn" onclick="showGit('undo')">撤销</button>
+        <button class="tool-btn" onclick="showGit('all')">全部</button>
+    </div>
+    <div id="gitList" style="font-size:13px;"></div>
+</div>
+<script>
+var GIT_DATA={
+    'start':[
+        ['git init','初始化新仓库','git init'],
+        ['git clone','克隆远程仓库','git clone https://github.com/user/repo.git'],
+        ['git status','查看工作区状态','git status'],
+        ['git log','查看提交历史','git log --oneline --graph'],
+        ['git config','配置用户信息','git config --global user.name "Your Name"'],
+    ],
+    'branch':[
+        ['git branch','列出本地分支','git branch (当前分支前有*)'],
+        ['git branch <name>','创建新分支','git branch feature-login'],
+        ['git checkout <name>','切换分支','git checkout develop'],
+        ['git checkout -b <name>','创建并切换','git checkout -b new-feature'],
+        ['git merge <name>','合并分支到当前','git merge feature-login'],
+        ['git branch -d <name>','删除分支','git branch -d old-branch'],
+    ],
+    'commit':[
+        ['git add .','暂存所有变更','git add .'],
+        ['git add <file>','暂存指定文件','git add src/index.js'],
+        ['git commit -m','提交暂存区','git commit -m "feat: add login"'],
+        ['git commit -am','暂存+提交(已跟踪)','git commit -am "fix: bug fix"'],
+        ['git diff','查看未暂存的变更','git diff'],
+        ['git stash','暂存当前工作','git stash (后可用git stash pop恢复)'],
+    ],
+    'remote':[
+        ['git remote -v','查看远程仓库','git remote -v'],
+        ['git push','推送到远程','git push origin main'],
+        ['git pull','拉取远程更新','git pull origin main'],
+        ['git fetch','获取远程但不合并','git fetch origin'],
+        ['git remote add','添加远程仓库','git remote add origin https://...'],
+        ['git push -u','推送并设置上游','git push -u origin main'],
+    ],
+    'undo':[
+        ['git reset HEAD <file>','取消暂存','git reset HEAD index.js'],
+        ['git checkout -- <file>','丢弃工作区修改','git checkout -- index.js'],
+        ['git reset --soft HEAD~1','撤销提交保留修改','git reset --soft HEAD~1'],
+        ['git reset --hard HEAD~1','撤销提交丢弃修改','git reset --hard HEAD~1 (小心!)'],
+        ['git revert <commit>','安全撤销(新建提交)','git revert abc123'],
+        ['git clean -fd','删除未跟踪文件','git clean -fd'],
+    ]
+};
+function showGit(cat){
+    document.querySelectorAll('.tool-btn').forEach(function(b){b.classList.remove('active');});event.target.classList.add('active');
+    var list=document.getElementById('gitList');var html='<table style="width:100%;border-collapse:collapse;font-size:13px;">';
+    html+='<tr style="background:#f0f4ff;"><th style="padding:8px;border:1px solid #ddd;text-align:left;">命令</th><th style="padding:8px;border:1px solid #ddd;text-align:left;">说明</th><th style="padding:8px;border:1px solid #ddd;text-align:left;">示例</th></tr>';
+    var items=cat==='all'?Object.values(GIT_DATA).flat():GIT_DATA[cat];
+    items.forEach(function(r){html+='<tr><td style="padding:6px 8px;border:1px solid #ddd;font-family:monospace;font-size:12px;white-space:nowrap;cursor:pointer;color:#6366f1;" onclick="copyT(\''+r[2].replace(/\'/g,'\"')+'\')">'+r[0]+'</td><td style="padding:6px 8px;border:1px solid #ddd;font-size:12px;">'+r[1]+'</td><td style="padding:6px 8px;border:1px solid #ddd;font-family:monospace;font-size:11px;color:#666;">'+r[2]+'</td></tr>';});
+    html+='</table>';list.innerHTML=html;
+}
+function copyT(t){navigator.clipboard.writeText(t).then(function(){alert('已复制!');});}
+showGit('start');
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
