@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url><loc>https://shg1103.github.io/</loc><priority>1.0</priority></url>
-    <url><loc>https://shg1103.github.io/sitemap.xml</loc><lastmod>2026-06-03</lastmod><priority>0.3</priority></url>
+    <url><loc>https://shg1103.github.io/sitemap.xml</loc><lastmod>2026-06-09</lastmod><priority>0.3</priority></url>
     <url><loc>https://shg1103.github.io/tools/json-formatter.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/regex-tester.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/json-diff.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/yaml-formatter.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/xml-formatter.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/case-converter.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/text-dedup.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/code-diff.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/markdown-to-html.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/html-entity.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/sql-formatter.html</loc><priority>0.7</priority></url>
@@ -15,13 +19,25 @@
     <url><loc>https://shg1103.github.io/tools/color-converter.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/json-csv-converter.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/number-base.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/jwt-generator.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/html-to-markdown.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/morse-code.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/image-to-base64.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/unicode-tool.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/hash-calculator.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/password-generator.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/file-hash.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/password-strength.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/api-key-generator.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/cipher-tool.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/captcha-generator.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/api-tester.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/uuid-generator.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/jsonpath-query.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/regex-reference.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/git-reference.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/html-preview.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/char-encoding.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/http-status.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/jwt-decoder.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/ua-parser.html</loc><priority>0.7</priority></url>
@@ -30,6 +46,10 @@
     <url><loc>https://shg1103.github.io/tools/qr-generator.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/css-gradient.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/palette-generator.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/emoji-picker.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/gradient-presets.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/svg-editor.html</loc><priority>0.7</priority></url>
+    <url><loc>https://shg1103.github.io/tools/icon-reference.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/lorem-ipsum.html</loc><priority>0.7</priority></url>
     <url><loc>https://shg1103.github.io/tools/text-counter.html</loc><priority>0.7</priority></url>
 </urlset>
