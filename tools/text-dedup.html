@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本去重排序工具 - 在线去重排序计数 | DevTools</title>
+    <meta name="description" content="免费在线文本去重排序工具，支持去重行、正序/倒序排列、统计每行出现次数、过滤空行、去除首尾空格，适用于日志分析、数据清洗、列表整理。">
+    <meta name="keywords" content="文本去重,去重工具,行排序,文本排序,数据清洗,重复行删除,计数工具,文本处理,list去重,在线去重">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/text-dedup.html">
+    <meta property="og:title" content="文本去重排序工具 - 在线去重排序计数 | DevTools">
+    <meta property="og:description" content="免费在线文本去重排序工具，支持去重行、正序/倒序排列、统计每行出现次数、过滤空行、去除首尾空格，适用于日志分析、数据清洗、列表整理。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/text-dedup.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="文本去重排序工具 - 在线去重排序计数 | DevTools">
+    <meta name="twitter:description" content="免费在线文本去重排序工具，支持去重行、正序/倒序排列、统计每行出现次数、过滤空行、去除首尾空格，适用于日志分析、数据清洗、列表整理。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>文本去重排序</h1>
+        <p style="color:#666;margin-bottom:20px;">去重、排序、计数、过滤，一行搞定</p>
+        <div class="tool-body"><div class="tool-ui">
+    <textarea id="ddInput" placeholder="每行一条数据，粘贴进来..." style="width:100%;height:150px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;resize:vertical;"></textarea>
+    <div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap;align-items:center;">
+        <button class="tool-btn" onclick="dedup('asc')">去重+升序</button>
+        <button class="tool-btn" onclick="dedup('desc')">去重+降序</button>
+        <button class="tool-btn" onclick="dedup('count_asc')">按次数升序</button>
+        <button class="tool-btn" onclick="dedup('count_desc')">按次数降序</button>
+        <button class="tool-btn" onclick="dedup('only')">仅去重</button>
+        <label><input type="checkbox" id="ddTrim" checked> 去空格</label>
+        <label><input type="checkbox" id="ddEmpty" checked> 去空行</label>
+    </div>
+    <textarea id="ddOutput" readonly placeholder="输出结果..." style="width:100%;height:200px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:13px;background:#f9f9f9;resize:vertical;"></textarea>
+    <div style="display:flex;gap:12px;margin-top:8px;font-size:12px;color:#888;">
+        <span id="ddStats"></span>
+        <button class="tool-btn" onclick="copyEl('ddOutput')">复制结果</button>
+    </div>
+</div>
+<script>
+function dedup(mode){
+    var inp=document.getElementById('ddInput').value;var out=document.getElementById('ddOutput');var stats=document.getElementById('ddStats');
+    var lines=inp.split('\n');
+    if(document.getElementById('ddTrim').checked) lines=lines.map(function(l){return l.trim();});
+    if(document.getElementById('ddEmpty').checked) lines=lines.filter(function(l){return l!=='';});
+    var count={};lines.forEach(function(l){count[l]=(count[l]||0)+1;});
+    var unique=Object.keys(count);
+    if(mode==='asc') unique.sort();
+    else if(mode==='desc') unique.sort().reverse();
+    else if(mode==='count_asc') unique.sort(function(a,b){return count[a]-count[b];});
+    else if(mode==='count_desc') unique.sort(function(a,b){return count[b]-count[a];});
+    var result='';
+    if(mode==='only'){unique.forEach(function(l){result+=l+'\n';});}
+    else if(mode==='count_asc'||mode==='count_desc'){unique.forEach(function(l){result+=l+' ('+count[l]+'次)\n';});}
+    else{unique.forEach(function(l){result+=l+'\n';});}
+    out.value=result;
+    stats.textContent='原始: '+lines.length+'行 | 去重后: '+unique.length+'行 | 总字符: '+result.length;
+}
+function copyEl(id){var v=document.getElementById(id).value;if(!v)return;navigator.clipboard.writeText(v).then(function(){alert('已复制!');});}
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
