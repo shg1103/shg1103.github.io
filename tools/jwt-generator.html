@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT在线生成器 - 自定义Header/Payload签名 | DevTools</title>
+    <meta name="description" content="免费在线JWT生成器，支持HS256/HS384/HS512签名算法，自定义Header和Payload，在线生成JWT Token，配套JWT解码器使用，适用于API认证开发调试。">
+    <meta name="keywords" content="JWT生成,JWT Token,JSON Web Token,JWT签名,JWT编码,JWT在线生成,HS256,HS384,HS512,API认证,Token生成器">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DevTools">
+    <link rel="canonical" href="https://shg1103.github.io/tools/jwt-generator.html">
+    <meta property="og:title" content="JWT在线生成器 - 自定义Header/Payload签名 | DevTools">
+    <meta property="og:description" content="免费在线JWT生成器，支持HS256/HS384/HS512签名算法，自定义Header和Payload，在线生成JWT Token，配套JWT解码器使用，适用于API认证开发调试。">
+    <meta property="og:url" content="https://shg1103.github.io/tools/jwt-generator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevTools 在线工具矩阵">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JWT在线生成器 - 自定义Header/Payload签名 | DevTools">
+    <meta name="twitter:description" content="免费在线JWT生成器，支持HS256/HS384/HS512签名算法，自定义Header和Payload，在线生成JWT Token，配套JWT解码器使用，适用于API认证开发调试。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1625872903750578" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header><div class="container"><a href="../index.html" class="logo">DevTools 工具站</a></div></header>
+    <main class="container tool-page">
+        <h1>JWT 生成器</h1>
+        <p style="color:#666;margin-bottom:20px;">自定义Header/Payload，HS256/384/512签名</p>
+        <div class="tool-body"><div class="tool-ui">
+    <div style="margin-bottom:12px;">
+        <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">Header (JSON)</label>
+        <textarea id="jwtHeader" style="width:100%;height:80px;padding:8px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:12px;">{"alg":"HS256","typ":"JWT"}</textarea>
+    </div>
+    <div style="margin-bottom:12px;">
+        <label style="font-weight:600;font-size:13px;display:block;margin-bottom:4px;">Payload (JSON)</label>
+        <textarea id="jwtPayload" style="width:100%;height:120px;padding:8px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:12px;">{"sub":"1234567890","name":"John Doe","iat":1516239022}</textarea>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:13px;">签名算法: <select id="jwtAlg" style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;"><option>HS256</option><option>HS384</option><option>HS512</option></select></label>
+        <label style="font-size:13px;">密钥: <input type="text" id="jwtSecret" value="your-secret-key" style="width:140px;padding:4px 8px;border:1px solid #ddd;border-radius:4px;font-family:monospace;font-size:12px;"></label>
+        <button class="tool-btn" onclick="genJWT()">生成 Token</button>
+    </div>
+    <textarea id="jwtOut" readonly placeholder="生成的JWT Token..." style="width:100%;height:80px;padding:10px;border:1px solid #ddd;border-radius:6px;font-family:monospace;font-size:12px;background:#f9f9f9;word-break:break-all;"></textarea>
+    <div style="margin-top:8px;"><button class="tool-btn" onclick="copyEl('jwtOut')">复制 Token</button></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/crypto-js.min.js"></script>
+<script>
+function genJWT(){
+    var header=document.getElementById('jwtHeader').value;var payload=document.getElementById('jwtPayload').value;var alg=document.getElementById('jwtAlg').value;var secret=document.getElementById('jwtSecret').value;
+    try{JSON.parse(header);}catch(e){alert('Header JSON 格式错误');return;}
+    try{JSON.parse(payload);}catch(e){alert('Payload JSON 格式错误');return;}
+    function b64u(s){return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+    var h=b64u(unescape(encodeURIComponent(header)));
+    var p=b64u(unescape(encodeURIComponent(payload)));
+    var sig='';
+    if(alg==='HS256') sig=CryptoJS.HmacSHA256(h+'.'+p,secret).toString(CryptoJS.enc.Base64).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    else if(alg==='HS384') sig=CryptoJS.HmacSHA384(h+'.'+p,secret).toString(CryptoJS.enc.Base64).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    else sig=CryptoJS.HmacSHA512(h+'.'+p,secret).toString(CryptoJS.enc.Base64).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    document.getElementById('jwtOut').value=h+'.'+p+'.'+sig;
+}
+function copyEl(id){var v=document.getElementById(id).value;if(!v)return;navigator.clipboard.writeText(v).then(function(){alert('已复制!');});}
+</script></div>
+        <div style="margin:24px 0;text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1625872903750578" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </main>
+</body>
+</html>
